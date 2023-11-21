@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <title>開発環境_Win_Python</title>
+    <link rel="stylesheet" href="code\srv.css">
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+        <section id="headline">
+            <div>
+                <h1>
+                    Flaskを使ったPythonでの開発環境構築
+                </h1>
+            </div>
+            <div>
+                <p>
+                    Javaの場合 > <a href="srvja.html">開発環境_Win_Java</a>
+                </p>
+            </div>
+        </section>
+        <section>
+            <div>
+                <h3>目次</h2>
+            </div>
+            <div>
+                <ol id="agenda">
+                </ol>
+                <noscript>
+                    <p>
+                        目次はJavaScriptで記述しているため、表示されませんでした。
+                    </p>
+                </noscript>
+            </div>
+        </section>
+        <h3>
+            &lt;注意&gt;<br>
+            C:/(Apacheの保存先)/などと記述されてある場合は、各自の環境で入力すること。
+        </h3>
+        <section id="python">
+            <diV>
+                <h2>
+                    1. Pythonのダウンロード、インストール
+                </h2>
+            </diV>
+            <div>
+                <p>
+                    アプリケーションをPythonで開発するためにPythonのダウンロードを行います。<br>
+                    まず、<a href="https://www.python.org/downloads/release/python-3116/"
+                        target="_blank">Python</a>のサイトにアクセスし、Python 3.11.6をダウンロードします。<br>
+                    <span class="supplement">資料作成時点では、バージョンの互換が悪く、3.12.0ではエラーが発生したためです。</span><br>
+                    下にスクロールすると、以下のような表があるので、Windows installer (64-bit)を選択します。<br>
+                    <img src="IMG\Files.jpg"><br>
+                    ダウンロードが終わったら、ファイルを実行します。<br>
+                    最初の画面で「Add python.exe to PATH」にチェックを入れ、「Customize installation」を選択します。<br>
+                    そのまま進んでいけばインストールが開始されます。<br>
+                    <img src="IMG\pyinstaller1.png" class="threeFace">
+                    <img src="IMG\pyinstaller2.png" class="threeFace">
+                    <img src="IMG\pyinstaller3.png" class="threeFace"><br>
+                    インストールが終わればPythonが使用可能になります。<br>
+                    インストールに使用したファイルはアンインストールにも使用できるので、削除してしまわないように注意しましょう。<br>
+                    動作の確認と今後の開発のためにVSCodeでテストします。<br>
+                    VSCodeの拡張機能「Python」と「Code Runner」をインストールします。<br>
+                    <img src="IMG\pythonEx.jpg" class="twoFace">
+                    <img src="IMG\CodeRunner.jpg" class="twoFace"><br>
+                    hello.pyというファイルを作成し、「print("Hello World!")」と書き込みます。<br>
+                    保存して右上の▷のボタンをクリックすると実行され、Hello Worldと表示されれば完了です。<br>
+                    <img src="IMG\hellopy.jpg" class="twoFace">
+                </p>
+            </div>
+        </section>
+        <section id="visualcpp">
+            <div>
+                <h2>
+                    2. Visual C++のダウンロード、インストール
+                </h2>
+            </div>
+            <div>
+                <p>
+                    Apacheで必要とのことなので、<a
+                        href="https://learn.microsoft.com/ja-jp/cpp/windows/latest-supported-vc-redist?view=msvc-170"
+                        target="_blank">Visual C++再頒布可能パッケージ</a>をダウンロードします。<br>
+                    「Visual Studio 2015、2017、2019、および
+                    2022」の下にある表の中のアーキテクチャがX64になっているURLをクリックし、ダウンロードします。<br>
+                    ダウンロードが終了し、ファイルを実行すると同意画面などが出ます。同意してそのまま進めるとインストールが始まります。<br>
+                </p>
+            </div>
+        </section>
+        <section id="buildtools">
+            <div>
+                <h2>
+                    3. Build Tools for Visual Studio 2022のダウンロード、インストール
+                </h2>
+            </div>
+            <div>
+                <p>
+                    ApacheとPythonを繋ぐmod_wsgiのビルドにはVisual Studioのツールが必要になっているようです。<br>
+                    すでに紫の「Visual Studio」をダウンロードされている場合は必要ありません。<br>
+                    <span class="supplement">青の「Visual Studio Code」には入っていません。</span><br>
+                    まず、<a href="https://visualstudio.microsoft.com/ja/downloads/" target="_blank">Visual
+                        Studioのダウンロードページ</a>にアクセスします。<br>
+                    下にスクロールして、「Tools for Visual Studio」の中の「Build Tools for Visual Studio」をダウンロードします。<br>
+                    ファイルを開いて進むと以下のような画面が表示されます。<br>
+                    <img src="IMG\btvs.png"><br>
+                    左上の「C++によるデスクトップ開発」を選択し、ダウンロードしながらインストールします。<br>
+                    <span class="supplement">ファイルサイズが大きいので、MSVC v143以外は外してみてもいいかもしれません。ただし、動作の保証はできません。</span>
+                </p>
+            </div>
+        </section>
+        <section id="apache">
+            <div>
+                <h2>
+                    4. Apacheのダウンロード、解凍、設定
+                </h2>
+            </div>
+            <div>
+                <p>
+                    WEBサーバとして利用するApacheは、<a href="https://www.apachelounge.com/download/" target="_blank">Apache
+                        Lounge</a>からzipファイルでダウンロードします。<br>
+                    ページ内のApache 2.4.58 Win64のhttpd-2.4.58-win64-VS17.zipをクリックします。<br>
+                    <span class="supplement">最近バージョン更新があったようで、また互換の問題が発生するかもしれません。</span><br>
+                    ダウンロードが完了したら、エクスプローラー<img src="IMG\explorerico.png" style="width:16px">を開きます。<br>
+                    たいていの場合、ダウンロードのフォルダに保存されているので、Apacheのフォルダを右クリックしてすべて展開します。<br>
+                    展開先を指定できると思います。OneDriveを避けながらアクセスしやすいフォルダ内にhttpdなどのフォルダを作成し展開します。<br>
+                    展開先にアクセスし、Apache24フォルダ内のconfフォルダ内にあるhttpd.confという設定ファイルをVSCodeやメモ帳などで開きます。<br>
+                    Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力し検索します。<br>
+                    右の画像のように、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
+                    <img src="IMG\httpdconfvsc.jpg" class="twoFace">
+                    <img src="IMG\httpdconfsrv.jpg" class="twoFace"><br>
+                    さらに、「ServerName」と入力し、検索します。<br>
+                    www.example.comを、以下のようにlocalhost:80とし、保存します。<br>
+                    <span class="supplement">Listenの初期値が80になっていないかもしれません。その場合はそちらも編集します。</span><br>
+                    <img src="IMG\httpdconfsvn.jpg"><br>
+                    httpd.confはこのあとまた使用するので、閉じずに最小化しておきます。<br>
+                    いい感じに起動するIDEがあんまりないのでWindows サービスとして登録します。<br>
+                    タスクバーの検索窓にcmdと入力し、検索結果を右クリックするなどしてコマンドプロンプトを管理者として実行します。<br>
+                    C:\windows\system32> と表示されているので、続けてcd ../../(Apacheの保存先)/binと入力し、Enterします。<br>
+                    <span class="supplement">コピペできるならその方が早いです。</span><br>
+                    左の表示が変わるので、さらに続けてhttpd -k installと入力し、Enterします。<br>
+                    <img src="IMG\cmdins.png"><br>
+                    これでおそらくサービスとして登録されるはずなので、タスクバーの検索窓に「サービス」と入力し、サービスを開きます。<br>
+                    以下のようになっていて、Apache2.4が確認できればコマンドプロンプトは終了します。<br>
+                    <img src="IMG\service.png"><br>
+                    Apache2.4の項目をダブルクリックすると、ウィンドウが開くので、「スタートアップの種類」を手動に変え、開始します。<br>
+                    おそらくファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。<br>
+                    <img src="IMG\servicew.png" style="width:30%"><br>
+                    ここまでの手順が行えていれば、ブラウザで<a href="http://localhost" target="_blank">localhost</a>にアクセスするとIt
+                    works!と表示されています。<br>
+                    開始と同じウィンドウから、停止を選び、Apacheは一度停止させておきます。<br>
+                </p>
+            </div>
+        </section>
+        <section id="pip">
+            <div>
+                <h2>
+                    5. Pythonパッケージのインストール
+                </h2>
+            </div>
+            <div>
+                <p>
+                    Pythonのパッケージには様々ありますが、基本的にはコマンドプロンプトかVSCodeのターミナルでインストール可能です。<br>
+                    コマンドプロンプトを起動します。今回は管理者ではなく、そのまま起動してください。<br>
+                    pip install setuptools wheel<br>
+                    pip install flask<br>
+                    pip install PyMySQL<br>
+                    pip install Flask-SQLAlchemy<br>
+                    pip install cryptography<br>
+                    <span class="supplement">pipが内部コマンド…と返される場合は、Pathが通っていません。環境変数として登録する必要があります。</span><br>
+                    以上のコマンドを実行した後、<br>
+                    set "MOD_WSGI_APACHE_ROOTDIR=C:/(Apacheの保存先)/Apache24"<br>
+                    <span class="supplement">\で入力せず/で入力しないと文字化け扱いされてしまい、次に進めないので注意。</span><br>
+                    を実行します。Enterで実行しても一行開けられるだけです。<br>
+                    最後に、pip install mod_wsgiを実行します。<br>
+                    これまでの手順でミスがなければ問題なく実行されるはずです。時計のようなアニメーションとSuccessfullyがわかりやすいです。<br>
+                    失敗してしまった場合、もう一度インストールするには、キャッシュを使わない<br>
+                    pip install --no-cache-dir mod_wsgiを実行してください。<br>
+                    ここで、アプリケーション用のフォルダを作成しておきます。<br>
+                    <span class="supplement">これがそのままwebアプリのソースに使われます。OneDriveは避けて作ります。</span><br>
+                    フォルダ内に、以下の内容を記述したapp.pyという名前のpythonファイルを作成します。
+                </p>
+                <pre><code>
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    name = "Flask Hello World!"
+    return name
+
+if __name__ == "__main__":
+    app.run()
+                </code></pre>
+                <p>
+                    このコードを実行すると、<a href="http://127.0.0.1:5000" target="_blank">http://127.0.0.1:5000</a>と出力されるので、Ctrl +
+                    クリックで、ブラウザでページを開きます。<br>
+                    開いた時に、Flask Hello World!と表示されていれば、Flaskが機能しています。<br>
+                    確認できれば、ターミナルでCtrl + CでFlaskの簡易サーバを停止させます。
+                </p>
+            </div>
+        </section>
+        <section id="modwsgi">
+            <div>
+                <h2>
+                    6. mod_wsgiの設定
+                </h2>
+            </div>
+            <div>
+                <p>
+                    前項のインストールが完了されれば、続けてコマンドプロンプトで<br>
+                    mod_wsgi-express module-configを実行します。<br>
+                    LoadFile, LoadModule, WSGIPythonHomeなどと三行ほど出力されるので、コピーしてhttpd.confの末尾にペーストします。<br>
+                    アプリケーション用のフォルダ内に、application.wsgiという名前のファイルを作り、以下の内容を記述します。<br>
+                </p>
+                <pre><code>
+import sys
+sys.path.insert(0, 'C:/(アプリケーション用のフォルダ)')
+from app import app as application
+                </code></pre>
+                <p>
+                    また、httpd.conf末尾に以下の内容を記述します。<br>
+                </p>
+                <pre><code>
+&lt;VirtualHost *:80&gt;
+    WSGIScriptAlias / "C:/(アプリケーション用のフォルダ)/application.wsgi"
+    &lt;Directory "C:/(アプリケーション用のフォルダ)"&gt;
+        Require all granted
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+                </code></pre>
+                <p>
+                    httpd.confがこのようになっていれば完了です。<br>
+                    <img src="IMG\httpdconfe.jpg"><br>
+                    まだ確認できていませんが、ここまでの手順がすべて正しくできていれば、<br>
+                    Apacheを起動して、localhostを開くと、Flask Hello World!と表示されています。
+                </p>
+            </div>
+        </section>
+        <section id="mysql">
+            <div>
+                <h2>
+                    7. MySQLのインストール
+                </h2>
+            </div>
+            <div>
+                <p>
+                    今回、データベースを操作するSQLにはMySQLを使用します。<br>
+                    <a href="https://dev.mysql.com/downloads/mysql/" target="_blank">MySQLのページ</a>からダウンロードします。<br>
+                    <span class="supplement">これも8.2.0にされていました。一応Archivesに8.1.0があります。8.2.0のCommand Line
+                        Clientは起動しにくいらしいです。</span><br>
+                    Windows (x86, 64-bit), MSI InstallerをDownloadします。<br>
+                    <span class="supplement">Windowsじゃないときは、Select Operating System:から選択してください。</span><br>
+                    No thanks, just start my download.を選択するとダウンロードが始まります。<br>
+                    ダウンロードしたインストーラを開き、Next > I accept ~にチェック、Next > Typical、Next > Installで進みます。<br>
+                    <span class="supplement">8.2.0で試したので8.1.0では異なるかもしれません。</span><br>
+                    一通り終われば、MySQL configuratorを開いて、Windows Serviceにチェックを入れてください。<br>
+                    <span class="supplement">始めから入っているかと思います。</span><br>
+                    おそらく設定するのはパスワードぐらいだと思います。<br>
+                </p>
+            </div>
+        </section>
+        <section id="db">
+            <div>
+                <h2>
+                    8. テスト用DBの作成
+                </h2>
+            </div>
+            <div>
+                <p>
+                    Flaskで操作するにあたって、DBは必要になります。"無"には接続できません。<br>
+                    DBを作成します。MySQL Command Line Clientを開き、パスワードを入力します。<br>
+                </p>
+                <details id="mysqlclc">
+                    <summary>MySQL Command Line Clientが開かないとき</summary>
+                    「環境変数を編集」という名前で出てくるアプリの<br>
+                    「Path」をクリックし、編集 > 新規で C:\Program Files\MySQL\MySQL Server (バージョン)\bin<br>
+                    を追加してください。バージョンには8.2などと入力すればいいです。<br>
+                    その後、OKを押してウィンドウを全て消し、コマンドプロンプトで mysql -u root -pと入力してください。
+                </details>
+                <p>
+                    長い説明の後、mysql>と表示されるので、CREATE DATABASE test;と入力します。<br>
+                    <span class="supplement">;を入れないと一生聞いてきます。</span><br>
+                    SHOW Databases;と入力すると、今作ったtestがあるはずです。<br>
+                    USE test;と入力し、<br>
+                    CREATE TABLE members (id INT AUTO_INCREMENT, name TEXT, PRIMARY KEY (id)) DEFAULT CHARSET=utf8;<br>
+                    と入力し、さらに以下の3つのコマンドを実行します。<br>
+                    SELECT * FROM members;<br>
+                    <span class="supplement">空のテーブルなので中身入ってないはず。しなくてもよい</span><br>
+                    INSERT INTO members(name) VALUES ('高井才明');<br>
+                    SELECT * FROM members;と入力すると、テーブルが確認できます。<br><br>
+                    次に、Python側での処理を記述します。<br>
+                    app.pyのfrom flask import Flaskをfrom flask import Flask, render_templateと記述し、<br>
+                    さらに改行して、from flask_sqlalchemy import SQLAlchemyと記述します。<br>
+                    以下の記述を追加することで、DBとの接続を行います。<br><br>
+                    db_uri = 'mysql+pymysql://root:(ルートのパスワード)@localhost/test?charset=utf8'<br>
+                    app.config['SQLALCHEMY_DATABASE_URI'] = db_uri<br>
+                    db = SQLAlchemy(app)<br><br>
+                    また、以下の記述で、テーブルを読み込みます。
+                </p>
+                <pre><code>
+class Member(db.Model):
+    __tablename__ = 'members'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text())
+                </code></pre>
+                def hello():の内の変数nameをMember.query.all()としてみてください。<br>
+                アプリケーション用のフォルダ内に、「templates」という名前のフォルダを作成し、中にindex.htmlを作成します。<br>
+                <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ja"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;semApp index&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    {% for members in members %}
+    &lt;p&gt;{{members.name}}&lt;/p&gt;
+    {% endfor %}
+&lt;/body&gt;
+
+&lt;/html&gt;
+                </code></pre>
+                <p>
+                    return name をreturn render_template('index.html', members=name)とします。<br>
+                    サービスでMySQLの起動を確認してFlaskかApacheを起動して確認してみてください。<br>
+                    <span class="supplement">厳密にはrootユーザを用いることは好ましくないです。余裕があればユーザを追加してください。</span>
+                </p>
+            </div>
+        </section>
+        <section id="refs">
+            <div>
+                <h2>
+                    9. 参考
+                </h2>
+            </div>
+            <div>
+                <p>
+                    <a href="https://www.javadrive.jp/python/install/index1.html" target="_blank">
+                        Pythonのダウンロード (https://www.javadrive.jp/python/install/index1.html)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://skydum.hatenablog.com/entry/2023/09/02/221833" target="_blank">
+                        Build Tools for Visual Studio 2022、mod_wsgi
+                        (https://skydum.hatenablog.com/entry/2023/09/02/221833)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://www.javadrive.jp/apache/install/index1.html" target="_blank">
+                        Apacheのダウンロード (https://www.javadrive.jp/apache/install/index1.html)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://qiita.com/NAKA_G/items/f34738df364af8cbd58e#Part2" target="_blank">
+                        Flask Apache連携 (https://qiita.com/NAKA_G/items/f34738df364af8cbd58e#Part2)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://cream-worker.blog.jp/archives/1071537855.html" target="_blank">
+                        set "MOD_WSGI_APACHE_ROOTDIR=" (https://cream-worker.blog.jp/archives/1071537855.html)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://qiita.com/GleamingCake/items/8cfb047f40e779fba9a0" target="_blank">
+                        setuptools wheel (https://qiita.com/GleamingCake/items/8cfb047f40e779fba9a0)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://zenn.dev/shimo_s3/articles/aef94a9ca2216c" target="_blank">
+                        mysqlとの接続に使うパッケージ (https://zenn.dev/shimo_s3/articles/aef94a9ca2216c)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://www.javadrive.jp/mysql/install/index1.html" target="_blank">
+                        MySQLのダウンロード (https://www.javadrive.jp/mysql/install/index1.html)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://www.javadrive.jp/mysql/install/index2.html" target="_blank">
+                        MySQLのインストール (https://www.javadrive.jp/mysql/install/index2.html)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://qiita.com/Bashi50/items/e3459ca2a4661ce5dac6" target="_blank">
+                        SQLAlchemyについて (https://qiita.com/Bashi50/items/e3459ca2a4661ce5dac6)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://qiita.com/arkuchy/items/75799665acd09520bed2" target="_blank">
+                        SQLAlchemyについて (https://qiita.com/arkuchy/items/75799665acd09520bed2)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://paiza.jp/works/flask/primer/beginner-flask4" target="_blank">
+                        SQLAlchemyについて (https://paiza.jp/works/flask/primer/beginner-flask4)
+                    </a>
+                </p>
+                <p>
+                    <a href="https://prog-8.com/docs/mysql-database-setup" target="_blank">
+                        MySQLでのDB作成 (https://prog-8.com/docs/mysql-database-setup)
+                    </a>
+                </p>
+            </div>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+    <script>
+        h2 = document.getElementsByTagName('h2');
+        agenda = document.getElementById('agenda');
+        h2text = []
+        h2id = []
+        for (i = 0; i < h2.length; i++) {
+            text = h2[i].textContent.replace(/\n\s+/g, '');
+            text = text.replace(/\d\.\s/, '');
+            h2text.push(text);
+            h2id.push(h2[i].parentNode.parentNode.getAttribute('id'));
+            agenda.innerHTML += '<li><a href="#' + h2id[i] + '">' + h2text[i] + '</a></li>'
+        }
+    </script>
+</body>
+
+</html>
