@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <title>
         mtsuchi
     </title>
@@ -11,26 +12,27 @@
 </head>
 
 <body>
-    <header>
-        <div id="logo-area">
+    <header class="container-fluid d-flex justify-content-between">
+        <div id="logo-area" class="col-4 col-sm-2">
+            <img src="code/logo.svg" class="h-100 w-100" alt="logo">
         </div>
-        <ul>
-            <li>
+        <ul class="col-9 list-inline d-flex justify-content-around m-0">
+            <li class="list-inline-item align-self-center text-center col-3">
                 <a href="index.html">
                     Top
                 </a>
             </li>
-            <li>
+            <li class="list-inline-item align-self-center text-center col-3">
                 <a href="srv/srvja.html">
                     Server Java
                 </a>
             </li>
-            <li>
+            <li class="list-inline-item align-self-center text-center col-3">
                 <a href="srv/srvpy.html">
                     Server Python
                 </a>
             </li>
-            <li>
+            <li class="list-inline-item align-self-center text-center col-3">
                 <a href="game/dribble.html">
                     Rabbit Run
                 </a>

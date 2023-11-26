@@ -9,6 +9,17 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
+header {
+    height: 10vh;
+    position: fixed;
+    background-color: #ffffff;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+main {
+    padding-top: 10vh;
+}
+
 a {
     text-decoration: none;
     color: #ff8e1e;
