@@ -1,5 +1,17 @@
 @charset "utf-8";
 
+@font-face {
+    font-family: 'Orbitron';
+    font-display: block;
+    src: url('../../code/Orbitron-SemiBold.ttf');
+}
+
+@font-face {
+    font-family: 'Pacifico';
+    font-display: block;
+    src: url('../../code/Pacifico-Regular.ttf');
+}
+
 html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -9,11 +21,13 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
+
 header {
     height: 10vh;
     position: fixed;
     background-color: #ffffff;
     border-bottom: 1px solid #c0c0c0;
+    font-family: 'Orbitron', sans-serif;
 }
 
 main {
@@ -67,6 +81,10 @@ details pre {
 
 section div:nth-of-type(2) {
     margin: auto 2.5%;
+}
+
+#rabbitrun {
+    font-family: 'Pacifico', cursive;
 }
 
 .supplement {
