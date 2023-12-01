@@ -13,7 +13,7 @@
         <div id="logo-area" class="col-4 col-sm-2">
             <img src="../code/logo.svg" class="h-100 w-100" alt="logo">
         </div>
-        <ul class="col-9 nav m-0">
+        <ul id="menu" class="col-9 nav m-0">
             <li class="nav-item align-self-center text-center col-3 m-0">
                 <a href="../index.html">
                     <div>
@@ -454,19 +454,7 @@ class Member(db.Model):
     <footer>
 
     </footer>
-    <script>
-        h2 = document.getElementsByTagName('h2');
-        agenda = document.getElementById('agenda');
-        h2text = []
-        h2id = []
-        for (i = 0; i < h2.length; i++) {
-            text = h2[i].textContent.replace(/\n\s+/g, '');
-            text = text.replace(/\d\.\s/, '');
-            h2text.push(text);
-            h2id.push(h2[i].parentNode.parentNode.getAttribute('id'));
-            agenda.innerHTML += '<li><a href="#' + h2id[i] + '">' + h2text[i] + '</a></li>'
-        }
-    </script>
+    <script src="../code/index.js"></script>
 </body>
 
 </html>

@@ -62,15 +62,10 @@
                     Mavenを使ったEclipseでの開発環境構築
                 </h1>
             </div>
-            <div>
-                <p>
-                    Pythonの場合 > <a href="srvpy.html">開発環境_Win_Python</a>
-                </p>
-            </div>
         </section>
         <section>
             <div>
-                <h3>目次</h2>
+                <h3>目次</h3>
             </div>
             <div>
                 <ol id="agenda">
@@ -586,16 +581,7 @@ public class Test extends HttpServlet
     <footer>
 
     </footer>
-    <script>
-        h2 = document.getElementsByTagName('h2');
-        agenda = document.getElementById('agenda');
-        for (i = 0; i < h2.length; i++) {
-            text = h2[i].textContent.replace(/\n\s+/g, '');
-            text = text.replace(/\d\.\s/, '');
-            h2id = h2[i].parentNode.parentNode.getAttribute('id');
-            agenda.innerHTML += '<li><a href="#' + h2id + '">' + text + '</a></li>'
-        }
-    </script>
+    <script src="../code/index.js"></script>
 </body>
 
 </html>
