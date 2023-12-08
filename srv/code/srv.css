@@ -12,6 +12,12 @@
     src: url('../../code/Pacifico-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Roboto Condensed';
+    font-display: block;
+    src: url('../../code/RobotoCondensed-Regular.ttf');
+}
+
 html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -27,11 +33,10 @@ body.fix {
 }
 
 header {
-    height: 10vh;
     position: fixed;
     background-color: #ffffff;
     border-bottom: 1px solid #c0c0c0;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 main {

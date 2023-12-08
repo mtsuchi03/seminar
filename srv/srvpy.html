@@ -9,42 +9,29 @@
 </head>
 
 <body>
-    <header class="container-fluid d-flex justify-content-between">
+    <header class="container-fluid d-flex justify-content-between vh-5">
         <div id="logo-area" class="col-4 col-sm-2">
-            <img src="../code/logo.svg" class="h-100 w-100" alt="logo">
+            <a href="../index.html">
+                <img src="../code/logo.svg" class="h-100 w-100" alt="logo">
+            </a>
         </div>
         <div id="btn">
             <span></span><span></span>
         </div>
-        <ul id="menu" class="col-9 nav m-0">
-            <li class="nav-item align-self-center text-center col-3 m-0">
-                <a href="../index.html">
-                    <div>
-                        <h3>
-                            Top
-                        </h3>
-                    </div>
-                </a>
+        <ul id="menu" class="col-9 nav m-0 justify-content-end">
+            <li class="nav-item text-center col-4 m-0 h-100">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        サーバ
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="srvja.html">Java</a></li>
+                        <li><a class="dropdown-item" href="#">Python</a></li>
+                    </ul>
+                </div>
             </li>
-            <li class="nav-item align-self-center text-center col-3 m-0">
-                <a href="srvja.html">
-                    <div>
-                        <h3>
-                            Server (Java)
-                        </h3>
-                    </div>
-                </a>
-            </li>
-            <li class="nav-item align-self-center text-center col-3 m-0">
-                <a href="#">
-                    <div>
-                        <h3>
-                            Server (Python)
-                        </h3>
-                    </div>
-                </a>
-            </li>
-            <li class="nav-item align-self-center text-center col-3">
+            <li class="nav-item align-self-center text-center col-4 h-100">
                 <a href="../game/dribble.html">
                     <div>
                         <h3 id="rabbitrun">
@@ -457,6 +444,10 @@ class Member(db.Model):
     <footer>
 
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="../code/js/bootstrap.min.js"></script>
     <script src="../code/index.js"></script>
 </body>
 

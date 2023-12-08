@@ -1,0 +1,402 @@
+﻿<!DOCTYPE html>
+
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Rabbit Run</title>
+    <style>
+        @font-face {
+            font-family: 'Pacifico';
+            font-display: block;
+            src: url('../code/Pacifico-Regular.ttf') format('truetype');
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            margin: auto;
+            width: 50vh;
+            height: 100vh;
+            border-left: 1px solid #c0c0c0;
+            border-right: 1px solid #c0c0c0;
+            overflow: hidden;
+        }
+
+        #title,
+        #start,
+        #result {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 60px;
+        }
+
+        #title {
+            top: 30%;
+            width: 300px;
+            font-size: 32px;
+            text-align: center;
+            font-family: 'Pacifico';
+            color: white;
+            text-shadow: 1px 1px 1px black;
+        }
+
+        #start {
+            top: 70%;
+            border: 1px solid #000000;
+            background-color: #000000;
+        }
+
+        #start p {
+            line-height: 60px;
+            margin: 0;
+            text-align: center;
+            font-size: 20px;
+            color: #ffffff;
+            pointer-events: none;
+        }
+
+        .inview {
+            display: none;
+        }
+
+        #result {
+            top: 40%;
+            padding: 0;
+            margin: 0;
+            height: 90px;
+            width: 200px;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        ul:last-of-type {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        #totx {
+            display: inline-block;
+            width: 92px;
+            text-align-last: justify;
+        }
+
+        #sctx,
+        #titx {
+            display: inline-block;
+            width: 72px;
+            text-align-last: justify;
+        }
+
+        #total,
+        #time,
+        #score {
+            display: inline-block;
+            text-align: right;
+            width: 108px;
+        }
+
+        @media screen and (max-width: 600px) {
+            canvas {
+                width: 100%;
+                border: none;
+            }
+        }
+    </style>
+</head>
+
+<body onload="">
+    <canvas>JavaScriptが使用できません</canvas>
+    <ul id="result" class="inview">
+        <li>
+            <span id="totx">合計：</span><span id="total"></span>
+            <ul>
+                <li><span id="sctx">スコア：</span><span id="score"></span></li>
+                <li><span id="titx">時間：</span><span id="time"></span></li>
+            </ul>
+        </li>
+    </ul>
+    <div id="title">
+        <h2>
+            Rabbit Run
+        </h2>
+    </div>
+    <div id="start">
+        <p>
+            スタート！
+        </p>
+    </div>
+    <script>
+        'use strict'
+        const start = document.getElementById('start');
+        const title = document.getElementById('title');
+        const canvas = document.getElementsByTagName('canvas')[0];
+        const ctx = canvas.getContext('2d');
+        let score, playX, speX, item, enemy, main, t, grad, itemIndex;
+        let seed = [2];
+        let fruX = 15;
+        let speY = 2;
+        let isOver;
+        const WIDTH = 300;
+        const HEIGHT = 600;
+        canvas.width = WIDTH;
+        canvas.height = HEIGHT;
+
+        function checkCollision(cx, cy, cr) {
+            let dx = playX - cx;
+            let dy = 415 - cy;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 15 + cr)
+                return true;
+        }
+
+        class Character {
+            constructor() {
+                this.x = playX;
+                this.y = 415;
+                this.index = 0;
+                this.images = new Array;
+                this.images[0] = new Image();
+                this.images[0].src = 'IMG/rabbit1.png';
+                this.images[1] = new Image();
+                this.images[1].src = 'IMG/rabbit2.png';
+            }
+            tick(x) {
+                if (speX < 0) {
+                    this.index = 1;
+                } else {
+                    this.index = 0;
+                }
+                ctx.drawImage(this.images[this.index], x - 15, this.y - 15, 30, 30);
+            }
+        }
+
+        class Item {
+            constructor(index, x) {
+                this.x = (x + 1) * 30;
+                this.y = 0;
+                this.active = true;
+                this.index = index;
+                this.images = new Array;
+                this.images[0] = new Image();
+                this.images[0].src = 'IMG/item1.png';
+                this.images[1] = new Image();
+                this.images[1].src = 'IMG/item2.png';
+                this.scores = [100, 150];
+            }
+
+            tick() {
+                if (this.active == true) {
+                    if (end == 0) {
+                        this.y += 1;
+                    }
+                    if (checkCollision(this.x, this.y, 15) == true) {
+                        score += this.scores[this.index];
+                        this.active = false;
+                    }
+                    ctx.drawImage(this.images[this.index], this.x - 15, this.y - 15, 30, 30);
+                    if (this.y > 615) {
+                        this.active = false;
+                    }
+                }
+            }
+        }
+
+        class Enemy {
+            constructor(x) {
+                this.x = Math.floor((x - Math.floor(x)) * 6 + 1) * 40 + 10;
+                this.y = 0;
+                this.active = true;
+                this.image = new Image();
+                this.image.src = 'IMG/bear.png';
+            }
+
+            tick() {
+                if (this.active == true) {
+                    if (end == 0) {
+                        this.y += 1;
+                    }
+                    if (checkCollision(this.x, this.y, 15) == true) {
+                        isOver = true;
+                    }
+                    ctx.drawImage(this.image, this.x - 20, this.y - 15, 40, 30);
+                    if (this.y > 615) {
+                        this.active = false;
+                    }
+                }
+            }
+        }
+
+        function drawBG(y1, y2) {
+            ctx.fillStyle = '#4169e1';
+            ctx.fillRect(0, 0, 15, 600);
+            ctx.fillRect(285, 0, 300, 600);
+            y2 %= 600;
+            grad = ctx.createLinearGradient(0, y1 + y2, 0, 600 + y1 + y2);
+            grad.addColorStop(0, '#2bb32b');
+            grad.addColorStop(0.25, '#32cd32');
+            grad.addColorStop(0.5, '#2bb32b');
+            grad.addColorStop(0.75, '#32cd32');
+            grad.addColorStop(1, '#2bb32b');
+            ctx.fillStyle = grad;
+            ctx.fillRect(15, y1 + y2, 270, 600);
+            ctx.fillStyle = '#259925';
+            ctx.fillRect(15, 0, 5, 600);
+            ctx.fillRect(280, 0, 5, 600);
+        }
+
+        let index, set;
+        function setIndex(x) {
+            set = x * 10;
+            index = Math.floor((set - Math.floor(set)) * 10);
+            if (index % 3 == 0) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+        let itemSeed, i, newSeed;
+        function setItemX(x) {
+            i = 0;
+            while (true) {
+                newSeed = x * (100 ** (i + 1)) - Math.floor(x * (100 ** (i + 1)));
+                if (itemSeed.indexOf(Math.floor(newSeed * 8)) == -1) {
+                    itemSeed.push(Math.floor(newSeed * 8));
+                }
+                i++;
+                if (itemSeed.length > 2) {
+                    break;
+                }
+            }
+        }
+
+        let end;
+        const finish = () => {
+            ctx.clearRect(0, 0, 300, 600);
+            drawBG(0, t);
+            drawBG(-600, t);
+            if ((end > 5 && end < 10) || (end < 20 && end > 15) || end > 25) {
+                main.tick(playX);
+            }
+            item.forEach(function (element, index) {
+                item[index].tick();
+            })
+            enemy.forEach(function (element, index) {
+                enemy[index].tick();
+            })
+            if (end < 30) {
+                requestAnimationFrame(finish);
+            }
+            end++;
+        }
+
+        let scoreShow = document.getElementById('score');
+        let timeShow = document.getElementById('time');
+        let total = document.getElementById('total');
+        let result = document.getElementById('result');
+        let tMin;
+
+        function restart() {
+            start.children[0].textContent = 'もう一度';
+            start.classList.remove('inview');
+            start.style.top = '60%';
+            result.classList.remove('inview');
+            scoreShow.textContent = score;
+            if (t >= 3600) {
+                tMin = Math.floor(t / 3600);
+                timeShow.textContent = tMin + '分' + Math.floor((t - tMin * 3600) / 60) + '秒';
+            } else {
+                timeShow.textContent = Math.floor((t / 60) * 10) / 10 + '秒';
+            }
+            total.textContent = score + Math.floor(t / 60) * 10;
+        }
+
+        function spone() {
+            if (seed[0] >= seed[1]) {
+                itemSeed = [];
+                setItemX(seed[0]);
+                itemIndex = setIndex(seed[0]);
+                item.push(new Item(itemIndex, itemSeed[0]));
+                seed[0] *= 10;
+                if (seed[0] - Math.floor(seed[0]) > 0.5) {
+                    console.log(seed[0] - Math.floor(seed[0]))
+                    itemIndex = setIndex(set);
+                    item.push(new Item(itemIndex, itemSeed[1]));
+                    if (seed[0] - Math.floor(seed[0]) > 0.8) {
+                        itemIndex = setIndex(set);
+                        item.push(new Item(itemIndex, itemSeed[2]));
+                    }
+                }
+            } else {
+                seed[1] *= 10;
+                enemy.push(new Enemy(seed[1] * 10));
+                if ((seed[1] - Math.floor(seed[1])) > 0.8) {
+                    enemy.push(new Enemy(seed[1] * 100));
+                }
+            }
+        }
+
+        ctx.font = '12px Roboto';
+        drawBG(0, 0);
+        const mainloop = () => {
+            ctx.clearRect(0, 0, 300, 600);
+            drawBG(0, t);
+            drawBG(-600, t);
+            main.tick(playX);
+            seed[0] = Math.random();
+            seed[1] = Math.random();
+            if ((seed[0] * seed[1] > (0.90 - (t / 180000))) && t < 18000) {
+                spone();
+            } else if ((seed[0] * seed[1] > 0.8) && t >= 18000) {
+                spone();
+            }
+            item.forEach(function (element, index) {
+                item[index].tick();
+            })
+            enemy.forEach(function (element, index) {
+                enemy[index].tick();
+            })
+            ctx.fillStyle = 'black';
+            ctx.fillText('SCORE:' + score, 20, 10);
+            t++;
+            playX += speX;
+            if ((playX + speX < 290 && playX + speX > 10) && isOver == false) {
+                requestAnimationFrame(mainloop);
+            } else {
+                requestAnimationFrame(finish);
+                restart();
+            }
+        }
+
+
+        canvas.addEventListener('click', () => {
+            speX = -speX;
+        }, false)
+
+        start.addEventListener('click', () => {
+            start.classList.add('inview');
+            title.classList.add('inview');
+            result.classList.add('inview');
+            isOver = false;
+            score = 0;
+            playX = 150;
+            speX = 2;
+            t = 0;
+            end = 0;
+            item = new Array()
+            enemy = new Array()
+            main = new Character();
+            mainloop();
+        }, false)
+    </script>
+</body>
+
+</html>
