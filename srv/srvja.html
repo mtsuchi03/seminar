@@ -4,57 +4,69 @@
 <head>
     <meta charset="utf-8" />
     <title>開発環境_Win_Java</title>
-    <link rel="stylesheet" href="../code/css/bootstrap.min.css">
-    <link rel="stylesheet" href="code\srv.css">
+    <link rel="stylesheet" href="../static/sanitize.css">
+    <link rel="stylesheet" href="code/srv.css">
+    <link rel="stylesheet" href="../static/index.css">
 </head>
 
 <body>
-    <header class="container-fluid d-flex justify-content-between">
-        <div id="logo-area" class="col-4 col-sm-2">
-            <img src="../code/logo.svg" class="h-100 w-100" alt="logo">
-        </div>
+    <header>
         <div id="btn">
-            <span></span><span></span>
         </div>
-        <ul id="menu" class="col-9 nav m-0">
-            <li class="nav-item align-self-center text-center col-3 m-0">
+        <div id="logo-area">
+            <a href="#">
+                <img src="../static/svg/icon.svg" alt="logo">
+                <span>
+                    mtsuchi
+                </span>
+            </a>
+        </div>
+    </header>
+    <nav id="menu">
+        <div id="closebtn">
+            <img src="../static/svg/close.svg" alt="close">
+        </div>
+        <ul>
+            <li>
                 <a href="../index.html">
-                    <div>
-                        <h3>
-                            Top
-                        </h3>
-                    </div>
+                    <span>ホーム</span>
                 </a>
             </li>
-            <li class="nav-item align-self-center text-center col-3 m-0">
-                <a href="#">
-                    <div>
-                        <h3>
-                            Server (Java)
-                        </h3>
-                    </div>
-                </a>
+            <li id="srv">
+                <span>サーバ</span>
+                <span></span>
             </li>
-            <li class="nav-item align-self-center text-center col-3 m-0">
-                <a href="srvpy.html">
-                    <div>
-                        <h3>
-                            Server (Python)
-                        </h3>
-                    </div>
-                </a>
+            <li id="srvlst">
+                <ul>
+                    <li>
+                        <a href="srvja.html">
+                            <span>Java</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="srvpy.html">
+                            <span>Python</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li class="nav-item align-self-center text-center col-3">
-                <a href="../game/dribble.html">
-                    <div>
-                        <h3 id="rabbitrun">
-                            Rabbit Run
-                        </h3>
-                    </div>
-                </a>
+            </li>
+            <li id="game">
+                <span>ゲーム</span>
+                <span></span>
+            </li>
+            <li id="gamelst">
+                <ul>
+                    <li>
+                        <a href="../game/dribble.html">
+                            <span id="rabbitrun">Rabbit Run</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
-    </header>
+    </nav>
+    <div id="filter"></div>
     <main>
         <section id="headline">
             <div>
@@ -581,11 +593,7 @@ public class Test extends HttpServlet
     <footer>
 
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="../code/js/bootstrap.min.js"></script>
-    <script src="../code/index.js"></script>
+    <script src="../static/index.js"></script>
 </body>
 
 </html>
