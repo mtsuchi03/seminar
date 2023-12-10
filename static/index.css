@@ -169,7 +169,7 @@ ul li ul {
     }
 
     nav ul li {
-        height: 30px;
+        height: 40px;
     }
 
     nav ul li span {
@@ -191,13 +191,13 @@ ul li ul {
     #game span:last-of-type,
     #srv span:last-of-type {
         width: 20%;
-        height: 30px;
+        height: 40px;
         padding: 0 auto;
         margin: 0;
     }
 
     #srvlst.active {
-        height: 60px;
+        height: 80px;
     }
 
     #menu {
@@ -217,13 +217,19 @@ ul li ul {
         z-index: 50;
     }
 
-    #closebtn {
+    #mhead {
         width: 100%;
         height: 10vh;
         display: flex;
         flex-direction: row-reverse;
         padding-right: 2%;
         border-bottom: 1px solid #c0c0c0;
+        align-items: center;
+    }
+
+    #closebtn {
+        height: 40px;
+        width: 40px;
     }
 
     #filter.active {
