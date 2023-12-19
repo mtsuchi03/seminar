@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>開発環境_Win_Java</title>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="../static/sanitize.css">
-    <link rel="stylesheet" href="code/srv.css">
     <link rel="stylesheet" href="../static/index.css">
 </head>
 
@@ -14,7 +14,7 @@
         <div id="btn">
         </div>
         <div id="logo-area">
-            <a href="#">
+            <a href="../index.html">
                 <img src="../static/svg/icon.svg" alt="logo">
                 <span>
                     mtsuchi
@@ -23,8 +23,10 @@
         </div>
     </header>
     <nav id="menu">
-        <div id="closebtn">
-            <img src="../static/svg/close.svg" alt="close">
+        <div id="mhead">
+            <div id="closebtn">
+                <img src="../static/svg/close.svg" alt="close">
+            </div>
         </div>
         <ul>
             <li>
@@ -146,7 +148,7 @@
                     <img src="IMG\service.png"><br>
                     Apache2.4の項目をダブルクリックすると、ウィンドウが開くので、「スタートアップの種類」を手動に変え、開始します。<br>
                     おそらくファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。<br>
-                    <img src="IMG\servicew.png" style="width:30%"><br>
+                    <img src="IMG\servicew.png" class="twoFace"><br>
                     ここまでの手順が行えていれば、ブラウザで<a href="http://localhost" target="_blank">localhost</a>にアクセスするとIt
                     works!と表示されています。<br>
                     開始と同じウィンドウから、停止を選び、Apacheは一度停止させます。<br>
@@ -406,7 +408,7 @@
                     src > main内にjavaフォルダを作成し、さらにlocalhostフォルダも作成しておきます。<br>
                     <span class="supplement">localhostの方はあってもなくても結果は同じです。</span><br>
                     作成したフォルダ内にjavaファイルを作成します。とりあえずTest.javaとしておきましょう。<br>
-                    <img src="IMG\dirjava.jpg" class="threeFace"><br>
+                    <img src="IMG\dirjava.jpg" class="twoFace"><br>
                     Test.javaは以下のような記述をします。packageはフォルダを作らなかった場合は記述不要です。<br>
                     パスワードの部分は書き換えてください。
                 </p>

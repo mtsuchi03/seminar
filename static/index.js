@@ -28,6 +28,7 @@ game.addEventListener('click', () => {
     game.classList.toggle('active');
     gamelst.classList.toggle('active');
 })
+//list action
 
 h2 = document.getElementsByTagName('h2');
 agenda = document.getElementById('agenda');

@@ -62,6 +62,7 @@ main {
 section {
     background-color: #efefef;
     padding: 0 5px;
+    margin: 3vh 0;
     border: 1px solid #efefef;
     border-radius: 5px;
 }
@@ -71,16 +72,21 @@ section>div:last-of-type {
 }
 
 ul {
-    margin: 0;
+    margin: 100% 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 nav ul li {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #c0c0c0;
 }
 
-nav ul li a {
+nav ul li a,
+ul li ul {
     width: 100%;
 }
 
@@ -123,7 +129,22 @@ p {
 }
 
 #menu {
-    display: none;
+    margin-top: 10vh;
+    height: 90vh;
+    width: 25%;
+    background-color: #ffffff;
+    display: flex;
+    position: fixed;
+    left: -65%;
+    transition: .3s;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+}
+
+#menu.active {
+    left: 0;
+    z-index: 50;
 }
 
 #game span:last-of-type,
@@ -137,8 +158,8 @@ p {
     transform: rotate(180deg);
 }
 
-ul li ul {
-    width: 100%;
+#closebtn {
+    display: none;
 }
 
 #srvlst,
@@ -158,8 +179,32 @@ ul li ul {
     pointer-events: auto;
 }
 
+ul li ul li:last-child {
+    border-bottom: none;
+}
+
 #rabbitrun {
     font-family: 'Pacifico', cursive;
+}
+
+details {
+    background-color: #d3d3d3;
+}
+
+summary {
+    background-color: #f0f8ff;
+}
+
+img {
+    width: 75%;
+}
+
+img.twoFace {
+    width: 50%;
+}
+
+img.threeFace {
+    width: 33%;
 }
 
 @media screen and (max-width: 767px) {
@@ -168,14 +213,54 @@ ul li ul {
         flex-direction: row-reverse;
     }
 
+    #menu {
+        margin-top: 0;
+        height: 100vh;
+        width: 65%;
+        left: auto;
+        right: -65%;
+        align-items: normal;
+        font-size: unset;
+    }
+
+    #menu.active {
+        left: auto;
+        right: 0;
+    }
+
+    #mhead {
+        width: 100%;
+        height: 10vh;
+        display: flex;
+        flex-direction: row-reverse;
+        padding-right: 2%;
+        border-bottom: 1px solid #c0c0c0;
+        align-items: center;
+    }
+
+    #closebtn {
+        display: block;
+        height: 40px;
+        width: 40px;
+    }
+
+    ul {
+        margin: 0;
+        height: auto;
+        width: 100%;
+        display: block;
+    }
+
     nav ul li {
         height: 40px;
+        border-bottom: 1px solid #c0c0c0;
     }
 
     nav ul li span {
         width: 100%;
         margin: 0 5%;
     }
+
 
     #srvlst ul li span,
     #gamelst ul li span {
@@ -200,45 +285,12 @@ ul li ul {
         height: 80px;
     }
 
-    #menu {
-        height: 100vh;
-        width: 65%;
-        background-color: #ffffff;
-        display: flex;
-        position: fixed;
-        right: -65%;
-        transition: .3s;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    #menu.active {
-        right: 0;
-        z-index: 50;
-    }
-
-    #mhead {
+    img {
         width: 100%;
-        height: 10vh;
-        display: flex;
-        flex-direction: row-reverse;
-        padding-right: 2%;
-        border-bottom: 1px solid #c0c0c0;
-        align-items: center;
     }
 
-    #closebtn {
-        height: 40px;
-        width: 40px;
-    }
-
-    #filter.active {
-        position: fixed;
-        background: rgba(0, 0, 0, .5);
-        width: 100vw;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        z-index: 10;
+    pre {
+        height: 150px;
+        overflow: scroll;
     }
 }
