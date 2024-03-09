@@ -2,18 +2,27 @@ const btn = document.getElementById('btn');
 const menu = document.getElementById('menu');
 const body = document.getElementsByTagName('body')[0];
 const filter = document.getElementById('filter');
-const closebtn = document.getElementById('closebtn');
 
 function menuAction() {
+    if (body.style.position != 'fixed') {
+        body.style.position = 'fixed';
+    } else {
+        body.style.position = '';
+    }
     btn.classList.toggle('active');
     menu.classList.toggle('active');
     filter.classList.toggle('active');
 }
 
 btn.addEventListener('click', menuAction);
-closebtn.addEventListener('click', menuAction);
 filter.addEventListener('click', menuAction);
 //menu btn action
+
+for (i = 0; i < 2; i++) {
+    btnParts = document.createElement('span');
+    btn.appendChild(btnParts);
+}
+//menu btn create
 
 const srv = document.getElementById('srv');
 const game = document.getElementById('game');
