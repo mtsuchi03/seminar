@@ -2,13 +2,24 @@ const btn = document.getElementById('btn');
 const menu = document.getElementById('menu');
 const body = document.getElementsByTagName('body')[0];
 const filter = document.getElementById('filter');
+let isTouchMoveActive = false;
+
+function disableScroll(event) {
+    event.preventDefault();
+}
+
+function toggleTouchMove() {
+    if (isTouchMoveActive) {
+        body.removeEventListener('touchmove', disableScroll, { passive: false });
+        isTouchMoveActive = false;
+    } else {
+        body.addEventListener('touchmove', disableScroll, { passive: false });
+        isTouchMoveActive = true;
+    }
+}
 
 function menuAction() {
-    if (body.style.position != 'fixed') {
-        body.style.position = 'fixed';
-    } else {
-        body.style.position = '';
-    }
+    toggleTouchMove();
     btn.classList.toggle('active');
     menu.classList.toggle('active');
     filter.classList.toggle('active');
@@ -22,7 +33,7 @@ for (i = 0; i < 2; i++) {
     btnParts = document.createElement('span');
     btn.appendChild(btnParts);
 }
-//menu btn create
+//create menu btn
 
 const srv = document.getElementById('srv');
 const game = document.getElementById('game');
