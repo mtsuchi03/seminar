@@ -36,6 +36,7 @@ html {
 body {
     -webkit-font-smoothing: subpixel-antialiased;
     overflow-x: hidden;
+    font-family: 'メイリオ', 'Meiryo', sans-serif;
     width: 100%;
 }
 
@@ -164,18 +165,18 @@ ul li ul li:last-child {
 }
 
 .items>li {
-    border-top: 1px solid #d3d3d3;
+    border-top: 1px solid #dcdcdc;
     padding: 2.5%;
 }
 
 .items>li:last-child {
-    border-bottom: 1px solid #d3d3d3;
+    border-bottom: 1px solid #dcdcdc;
 }
 
 span.date {
     display: block;
     font-size: .75em;
-    color: #707070;
+    color: #808080;
 }
 
 span.title,
@@ -214,7 +215,7 @@ div.sumb-area>.digest {
 }
 
 .headlines {
-    border-bottom: 1px solid #a9a9a9;
+    border-bottom: 1px solid #d3d3d3;
 }
 
 section#presents {
@@ -235,7 +236,7 @@ section#presents {
 
 footer {
     height: 10vh;
-    border-top: 1px solid #c0c0c0;
+    border-top: 1px solid #dcdcdc;
     background-color: #efefef;
     text-align: center;
     padding: 10px 0;
@@ -284,7 +285,7 @@ footer {
     header {
         height: 60px;
         justify-content: center;
-        border-bottom: 1px solid #c0c0c0;
+        border-bottom: 1px solid #dcdcdc;
     }
 
     .logo-area {
@@ -387,15 +388,6 @@ footer {
 
     #filter.active {
         background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .items>li {
-        border-top: 1px solid #d3d3d3;
-        padding: 2.5%;
-    }
-
-    .items>li:last-child {
-        border-bottom: 1px solid #d3d3d3;
     }
 
     div.sumb-area>.sumbnail {
