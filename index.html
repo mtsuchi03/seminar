@@ -5,94 +5,186 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>
-        mtsuchi
+        mtsuchi03
     </title>
-    <link rel="icon" type="image/svg+xml" href="static/svg/icon.svg">
-    <link rel="stylesheet" href="static/sanitize.css">
-    <link rel="stylesheet" href="static/index.css">
+    <link rel="icon" type="image/svg+xml" href="resources/svg/icon.svg">
+    <link rel="stylesheet" href="code/sanitize.css">
+    <link rel="stylesheet" href="code/load.css">
+    <link rel="stylesheet" href="code/index.css">
 </head>
 
 <body>
+    <div class="loading noJS">
+        <div class="sk-fading-circle">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+        </div>
+    </div>
+    <script src="static/load.js"></script>
     <header>
         <div class="logo-area">
             <a href="index.html">
-                <img src="static/svg/icon.svg" alt="logo">
                 <span>
-                    mtsuchi
+                    mtsuchi03
                 </span>
             </a>
         </div>
         <div id="btn">
         </div>
     </header>
-    <nav id="menu">
-        <div class="logo-area">
-            <a href="index.html">
-                <img src="static/svg/icon.svg" alt="logo">
-                <span>
-                    mtsuchi
-                </span>
-            </a>
-        </div>
-        <ul>
-            <li>
-                <a href="index.html">
-                    <span>トップ</span>
-                </a>
-            </li>
-            <li id="srv">
-                <span>サーバ</span>
-                <span></span>
-            </li>
-            <li id="srvlst">
-                <ul>
-                    <li>
-                        <a href="srv/srvja.html">
-                            <span>Java</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="srv/srvpy.html">
-                            <span>Python</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            </li>
-            <li id="game">
-                <span>ゲーム</span>
-                <span></span>
-            </li>
-            <li id="gamelst">
-                <ul>
-                    <li>
-                        <a href="game/dribble.html">
-                            <span id="rabbitrun">Rabbit Run</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
     <div id="filter"></div>
     <main>
-        <section>
-            <div>
-                <h2>
-                    用途
-                </h2>
+        <nav id="menu">
+            <div class="logo-area">
+                <a href="index.html">
+                    <img src="resources/svg/icon.svg" alt="logo">
+                    <span>
+                        mtsuchi03
+                    </span>
+                </a>
             </div>
-            <div>
-                <p>
-                    手間や来年度との兼ね合いなどから3年次でアップロードしたものはこちらで管理します。<br>
-                    元サイト:<a href="http://takai-seminar.jp/2021/20-m-tsuchi/srvpy.html" target="_blank">srvpy</a>,
-                    <a href="http://takai-seminar.jp/2021/20-m-tsuchi/srvja.html" target="_blank">srvja</a>,
-                    <a href="http://takai-seminar.jp/2021/20-m-tsuchi/dribble.html" target="_blank">dribble</a>など
-                </p>
-            </div>
-        </section>
+            <ul>
+                <li>
+                    <p>
+                        工事中...
+                    </p>
+                </li>
+            </ul>
+        </nav>
+        <div>
+            <section>
+                <div>
+                    <!--バナーをつけようかなと-->
+                </div>
+            </section>
+            <section id="itemlist">
+                <div>
+                    <ul class="items">
+                        <li>
+                            <a href="items/vscode-r.html">
+                                <span class="date">
+                                    2024/07/12
+                                </span>
+                                <span class="title">
+                                    VSCodeでRを利用するために
+                                </span>
+                                <div class="sumb-area">
+                                    <span class="sumbnail">
+                                        <img src="resources/svg/icon.svg" alt="logo">
+                                    </span>
+                                    <span class="digest">
+                                        VSCodeでRを利用するための覚書
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="items/srvja.html">
+                                <span class="date">
+                                    2024/07/12
+                                </span>
+                                <span class="title">
+                                    Javaの開発環境構築(+Maven)
+                                </span>
+                                <div class="sumb-area">
+                                    <span class="sumbnail">
+                                        <img src="resources/IMG/logo_ja.png" alt="Java">
+                                    </span>
+                                    <span class="digest">
+                                        Javaの開発環境構築(+Maven)
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="items/srvpy.html">
+                                <span class="date">
+                                    2024/07/12
+                                </span>
+                                <span class="title">
+                                    Pythonの開発環境構築(+Flask)
+                                </span>
+                                <div class="sumb-area">
+                                    <span class="sumbnail">
+                                        <img src="resources/IMG/logo_py.png" alt="Python">
+                                    </span>
+                                    <span class="digest">
+                                        Pythonの開発環境構築(+Flask)
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="items/dribble.html">
+                                <span class="date">
+                                    2024/07/12
+                                </span>
+                                <span class="title">
+                                    Rabbit Run
+                                </span>
+                                <div class="sumb-area">
+                                    <span class="sumbnail">
+                                        <img src="resources/IMG/rabbit1.png" alt="rabbit">
+                                        <!-- ディレクトリの入れ替えが済んだら容量節約のため直読みしてください。 -->
+                                    </span>
+                                    <span class="digest">
+                                        3年次春学期に作成したミニゲームです。
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section id="about">
+                <div>
+                    <span class="headlines">
+                        このページについて
+                    </span>
+                </div>
+                <div class="sumb-area">
+                    <span class="sumbnail">
+                        <img src="resources/svg/icon.svg" alt="logo">
+                    </span>
+                    <span class="digest">
+                        今後の維持管理のため、3年次でアップロードしたものはこちらで管理します。<br>
+                        元サイト:<a href="http://takai-seminar.jp/2021/20-m-tsuchi/srvpy.html" target="_blank">srvpy</a>,
+                        <a href="http://takai-seminar.jp/2021/20-m-tsuchi/srvja.html" target="_blank">srvja</a>,
+                        <a href="http://takai-seminar.jp/2021/20-m-tsuchi/dribble.html" target="_blank">dribble</a>
+                    </span>
+                </div>
+            </section>
+            <section id="presents">
+                <div>
+                    <span class="headlines"></span>
+                </div>
+                <div>
+                    <span>
+                        mtsuchi03
+                    </span>
+                    <span>
+                        Powered by <a href="https://github.com" target="_blank">GitHub</a>
+                    </span>
+                </div>
+            </section>
+        </div>
     </main>
-    <script src="static/index.js"></script>
+    <footer>
+        <span>
+            <a href="https://github.com/mtsuchi03" target="_blank">マイページ</a>
+        </span>
+    </footer>
+    <script src="code/index.js"></script>
 </body>
 
 </html>

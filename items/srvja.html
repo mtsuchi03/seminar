@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>
+        Javaの開発環境構築(+Maven) | mtsuchi03
+    </title>
+    <link rel="icon" type="image/svg+xml" href="../resources/svg/icon.svg">
+    <link rel="stylesheet" href="../code/sanitize.css">
+    <link rel="stylesheet" href="../code/index.css">
+    <link rel="stylesheet" href="code/srv.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-area">
+            <a href="../index.html">
+                <span>
+                    mtsuchi03
+                </span>
+            </a>
+        </div>
+        <div id="btn">
+        </div>
+    </header>
+    <div id="filter"></div>
+    <main>
+        <nav id="menu">
+            <div class="logo-area">
+                <a href="../index.html">
+                    <img src="../resources/svg/icon.svg" alt="logo">
+                    <span>
+                        mtsuchi03
+                    </span>
+                </a>
+            </div>
+            <ul>
+                <li>
+                    <p>
+                        工事中...
+                    </p>
+                </li>
+            </ul>
+        </nav>
+        <div>
+            <section id="headline">
+                <div>
+                    <h1>
+                        Mavenを使ったEclipseでの開発環境構築
+                    </h1>
+                </div>
+            </section>
+            <section>
+                <div>
+                    <h3>目次</h3>
+                </div>
+                <div>
+                    <ol id="agenda">
+                    </ol>
+                    <noscript>
+                        <p>
+                            目次はJavaScriptで記述しているため、表示されませんでした。
+                        </p>
+                    </noscript>
+                </div>
+            </section>
+            <section>
+                <h3>
+                    &lt;注意&gt;<br>
+                    C:/(Apacheの保存先)/などと記述されてある場合は、各自の環境で入力すること。
+                </h3>
+            </section>
+            <section id="vcpp">
+                <div>
+                    <h2>
+                        1. Visual C++のダウンロード
+                    </h2>
+                </div>
+                <div>
+                    <p>
+                        Apacheで必要とのことなので、<a
+                            href="https://learn.microsoft.com/ja-jp/cpp/windows/latest-supported-vc-redist?view=msvc-170"
+                            target="_blank">Visual C++再頒布可能パッケージ</a>をダウンロードします。<br>
+                        「Visual Studio 2015、2017、2019、および
+                        2022」の下にある表の中のアーキテクチャがX64になっているURLをクリックし、ダウンロードします。<br>
+                        ダウンロードが終了し、ファイルを実行すると同意画面が出ます。同意してそのまま進めるとインストールが始まります。
+                    </p>
+                </div>
+            </section>
+            <section id="Apache">
+                <div>
+                    <h2>
+                        2. Apacheのダウンロード、解凍、設定
+                    </h2>
+                </div>
+                <div>
+                    <p>
+                        WEBサーバとして利用するApacheは、<a href="https://www.apachelounge.com/download/" target="_blank">Apache
+                            Lounge</a>からzipファイルでダウンロードします。<br>
+                        ページ内のApache 2.4.58 Win64のhttpd-2.4.58-win64-VS17.zipをクリックします。
+                        <span class="supplement">以下の説明では2.4.57ですが、2.4.58でも問題なく動作します。</span><br>
+                        ダウンロードが完了したら、エクスプローラー<img src="IMG\explorerico.png" style="width:16px">を開きます。<br>
+                        たいていの場合、ダウンロードのフォルダに保存されているので、Apacheのフォルダを右クリックしてすべて展開します。<br>
+                        展開先を指定できると思います。OneDriveを避けながらアクセスしやすいフォルダ内にhttpdなどのフォルダを作成し展開します。<br>
+                        展開先にアクセスし、Apache24フォルダ内のconfフォルダ内にあるhttpd.confという設定ファイルをVSCodeやメモ帳などで開きます。<br>
+                        Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力し検索します。<br>
+                        右の画像のように、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
+                        <img src="IMG\httpdconfvsc.jpg" class="twoFace">
+                        <img src="IMG\httpdconfsrv.jpg" class="twoFace"><br>
+                        さらに、「ServerName」と入力し、検索します。<br>
+                        www.example.comを、以下のようにlocalhost:80とし、保存します。
+                        <span class="supplement">Listenの初期値が80になっていないかもしれません。その場合はそちらも編集します。</span><br>
+                        <img src="IMG\httpdconfsvn.jpg"><br>
+                        httpd.confはこのあとまた使用するので、閉じずに最小化しておきます。<br>
+                        起動でコマンド操作をしなくてもよくなるので、Windows サービスとして登録します。<br>
+                        タスクバーの検索窓にcmdと入力し、検索結果を右クリックするなどしてコマンドプロンプトを管理者として実行します。<br>
+                        C:\windows\system32> と表示されているので、続けてcd ../../(Apacheの保存先)/binと入力し、Enterします。
+                        <span class="supplement">コピペできるならその方が早いです。</span><br>
+                        左の表示が変わるので、さらに続けてhttpd -k installと入力し、Enterします。<br>
+                        <img src="IMG\cmdins.png"><br>
+                        これでおそらくサービスとして登録されるはずなので、タスクバーの検索窓に「サービス」と入力し、サービスを開きます。<br>
+                        以下のようになっていて、Apache2.4が確認できればコマンドプロンプトは終了します。<br>
+                        <img src="IMG\service.png"><br>
+                        Apache2.4の項目をダブルクリックすると、ウィンドウが開くので、「スタートアップの種類」を手動に変え、開始します。<br>
+                        おそらくファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。<br>
+                        <img src="IMG\servicew.png" class="twoFace"><br>
+                        ここまでの手順が行えていれば、ブラウザで<a href="http://localhost" target="_blank">localhost</a>にアクセスするとIt
+                        works!と表示されています。<br>
+                        開始と同じウィンドウから、停止を選び、Apacheは一度停止させます。<br>
+                        また、このあと説明するTomcatとの連携に使う設定も記述しておきます。
+                        <span class="supplement">必ず一度起動してから記述してください。Tomcatの設定が完了しないと503エラーが出ます。</span><br>
+                        httpd.conf末尾に以下の記述を行います。
+                    </p>
+                    <pre><code>
+    ProxyPass / ajp://localhost:8009/
+    ProxyPassReverse / ajp://localhost:8009/
+                </code></pre>
+                    <p>
+                        また、144行目あたりにある以下の記述から#だけを削除し、有効化します。
+                    </p>
+                    <pre><code>
+    #LoadModule proxy_module modules/mod_proxy.so
+    #LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+                </code></pre>
+                    <p>
+                        以下のようになります。<br>
+                        <img src="IMG\proxypass.jpg" class="twoFace">
+                        <img src="IMG\loadmodule.jpg" class="twoFace"><br>
+                        これでTomcatの通信を受け付けることができます。
+                    </p>
+                </div>
+            </section>
+            <section id="maven">
+                <div>
+                    <h2>
+                        3. Mavenプロジェクトの作成
+                    </h2>
+                </div>
+                <div>
+                    <p>
+                        本来ならTomcatと行きたいところですが、Eclipseの設定を覚えていない可能性も考慮してこちらから進めます。<br>
+                        Eclipseを起動します。起動の際、webアプリのファイルを入れるワークスペースのディレクトリを設定します。
+                        <span class="supplement">これまで使っていたものと同じ場所でも構わないです。</span><br>
+                        起動したら、左上のファイル、新規の中からMavenプロジェクトを選びます。<br>
+                        <img src="IMG\mavenproj.jpg"><br>
+                        以下のような画面が開くので、「次へ」を選択します。<br>
+                        <img src="IMG/proj1.png" class="twoFace"><br>
+                        「すべてのカタログ」か「Maven Central」からmaven-archetype-webappを選択し、「次へ」をクリックします。
+                        <span class="supplement">org.apache.maven.archetypesなどと検索しても良いかと思います。</span><br>
+                        このとき、バージョンが1.4であるかどうか確認しておいてください。<br>
+                        <img src="IMG/proj2.png"><br>
+                        グループidはcom.exampleのような形が好まれるようですが今回はlocalhostで良いかと思います。<br>
+                        アーティファクトidはプロジェクトのフォルダ名になります。お好みでいいですが、極力日本語は避けましょう。<br>
+                        バージョンは0.0.1-SNAPSHOTとなっているところを1.0-SNAPSHOTとしてください。<br>
+                        パッケージは自動で入力されると思います。<br>
+                        すべて記述できれば「完了」を選択してください。<br>
+                        <img src="IMG/proj3.png"><br>
+                        コンソールが勝手に動きますが、一度だけ「y」と入力し、Enterする必要があります。<br>
+                        <img src="IMG/proj4.png"><br>
+                        最終的に以下のように「BUILD SUCCESS」と出てフォルダが作成されます。<br>
+                        <img src="IMG/proj6.png" class="twoFace"><br>
+                        Mavenの設定も記述します。<br>
+                        以下のように、Mavenの設定ファイルであるpom.xmlをMaven POMエディターで編集します。
+                        <span class="supplement">ダブルクリックで開けるような気もします。</span><br>
+                        <img src="IMG\pomeditor.jpg"><br>
+                        開いたpom.xmlの以下の記述を書き換えます。
+                    </p>
+                    <pre><code>
+&lt;url&gt;http://www.example.com&lt;/url&gt;
+                
+&lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;
+&lt;/properties&gt;
+                </code></pre>
+                    <p>
+                        urlをlocalhost、maven.compiler.~~を17とします。
+                    </p>
+                    <pre><code>
+&lt;url&gt;http://localhost&lt;/url&gt;
+                
+&lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+    &lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
+&lt;/properties&gt;
+                </code></pre>
+                    <details id="jrev">
+                        <summary>JREシステム・ライブラリーのバージョンが変わらない場合</summary>
+                        JREシステム・ライブラリーを右クリックしてプロパティーから選択するか、<br>
+                        pom.xmlの&lt;build&gt;内&lt;pluginManagement&gt;の中からmaven-compiler-pluginを探し、<br>
+                        &lt;version&gt;のすぐ下に以下のように追記します。<br>
+                        <pre><code>           
+&lt;configuration&gt;
+    &lt;source&gt;17&lt;/source&gt;
+    &lt;target&gt;17&lt;/target&gt;
+&lt;/configuration&gt;
+                    </code></pre>
+                    </details><br>
+                    <details id="classpathe">
+                        <summary>クラスパス・エントリー ~~ は、エクスポートまたは公開されません。</summary>
+                        Eclipseの場合、マーカーとして警告が表示されると思います。<br>
+                        このような警告が出ている場合、警告の文字を右クリックし、クイックフィックスから<br>
+                        関連するrawクラスパスエントリを除外してください。
+                    </details>
+                    <p>
+                        警告の対処が終われば、プロジェクトを右クリックして実行からMaven installを行います。<br>
+                        <img src="IMG/mvninstall.jpg"><br>
+                        コンソールの動きが止まったら同様にサーバーで実行します。<br>
+                        Tomcat10_Java17でいいと思います。下の常に使用するかは各自の判断とします。<br>
+                        特に何もなければそのまま完了を押せば起動します。
+                    </p>
+                </div>
+            </section>
+            <section id="tomcat">
+                <div>
+                    <h2>
+                        4. Tomcatの設定
+                    </h2>
+                </div>
+                <div>
+                    <p>
+                        Eclipseに初期から入っているTomcatの設定は、Serversフォルダ内で編集する必要があります。<br>
+                        ワークスペースのディレクトリがわかるならそのままエクスプローラーから開いてください。<br>
+                        わからない場合は、プロジェクトを右クリックし、一番下にあるプロパティのリソースを開きます。<br>
+                        ロケーションと書かれている場所にアイコンがあるのでそこをクリックするとワークスペースが開きます。<br>
+                        その中の「Servers」を開き、先ほど選んだTomcatとJavaのバージョンが同じ組み合わせのconfigを開きます。<br>
+                        xmlなどが並んでいるので、server.xmlをテキストエディタなどで開きます。
+                        <span class="supplement">Eclipse, VSCode, メモ帳など編集できれば良いです。</span><br>
+                        102行目あたりにある以下のコードのうち、一番上の行はそのままでいいので、その下から書き換えます。
+                    </p>
+                    <pre><code>
+&lt;!-- Define an AJP 1.3 Connector on port 8009 --&gt;
+&lt;!--
+&lt;Connector protocol="AJP/1.3"
+           address="::1"
+           port="8009"
+           redirectPort="8443"
+           maxParameterCount="1000"
+           /&gt;
+--&gt;
+                </code></pre>
+                    <p>
+                        &lt;!-- --&gt;内はコメント化されていて実行されません。<br>
+                        以下のように書き換えます。<br>
+                    </p>
+                    <pre><code>
+&lt;!-- Define an AJP 1.3 Connector on port 8009 --&gt;
+&lt;Connector protocol="AJP/1.3"
+            address="0.0.0.0"
+            port="8009"
+            redirectPort="8443"
+            maxParameterCount="1000"
+            secretRequired="false"
+            /&gt;
+                </code></pre>
+                    <p>
+                        本来はtomcat-users.xmlの編集もした方がよいと思いますが、しなくてもとりあえず動くので、後回しとします。<br>
+                        書き換えが正しく行われているか確認するため、Tomcatの再起動を行います。<br>
+                        EclipseにTomcatが並んでいるところがあると思います。
+                        <span class="supplement">無ければ、上のウィンドウ > ビューの表示からサーバーを選択してください。</span><br>
+                        停止していた場合は起動、起動しているなら再起動のアイコンをクリックすると起動されます。<br>
+                        ここでサービスからApacheを起動します。<br>
+                        このまま<a href="http://localhost" target="_blank">localhost</a>にアクセスすると404が青っぽい画面で出ていると思います。
+                        <span class="supplement">503は設定の問題だと思います。とりあえずサーバーを再起動して無理なら設定を見直してください。</span><br>
+                        ここで、localhost/アーティファクトidのように記述します。自分の場合はseminarとしたので、<a href="http://localhost/seminar"
+                            target="_blank">localhost/seminar</a>です。<br>
+                        Hello World!と表示されていれば上手くいっています。
+                        <span class="supplement">src > main > webapp のindex.jspが表示されています。</span>
+                    </p>
+                </div>
+            </section>
+            <section id="mysql">
+                <div>
+                    <h2>
+                        5. MySQLのインストール
+                    </h2>
+                </div>
+                <div>
+                    <p>
+                        今回、データベースを操作するSQLにはMySQLを使用します。<br>
+                        <a href="https://dev.mysql.com/downloads/mysql/" target="_blank">MySQLのページ</a>からダウンロードします。
+                        <span class="supplement">これも8.2.0にされていました。一応Archivesに8.1.0があります。8.2.0のCommand Line
+                            Clientは起動しにくいらしいです。</span><br>
+                        Windows (x86, 64-bit), MSI InstallerをDownloadします。
+                        <span class="supplement">Windowsじゃないときは、Select Operating System:から選択してください。</span><br>
+                        No thanks, just start my download.を選択するとダウンロードが始まります。<br>
+                        ダウンロードしたインストーラを開き、Next > I accept ~にチェック、Next > Typical、Next > Installで進みます。
+                        <span class="supplement">8.2.0で試したので8.1.0では異なるかもしれません。</span><br>
+                        一通り終われば、MySQL configuratorを開いて、Windows Serviceにチェックを入れてください。
+                        <span class="supplement">始めから入っているかと思います。</span><br>
+                        おそらく設定するのはパスワードぐらいだと思います。<br>
+                    </p>
+                </div>
+            </section>
+            <section id="db">
+                <div>
+                    <h2>
+                        6. テスト用DBの作成
+                    </h2>
+                </div>
+                <div>
+                    <p>
+                        DBを作成します。MySQL Command Line Clientを開き、パスワードを入力します。
+                    </p>
+                    <details id="mysqlclc">
+                        <summary>MySQL Command Line Clientが開かないとき</summary>
+                        「環境変数を編集」という名前で出てくるアプリの<br>
+                        「Path」をクリックし、編集 > 新規で C:\Program Files\MySQL\MySQL Server (バージョン)\bin<br>
+                        を追加してください。バージョンには8.2などと入力すればいいです。<br>
+                        その後、OKを押してウィンドウを全て消し、コマンドプロンプトで mysql -u root -pと入力してください。
+                    </details>
+                    <p>
+                        長い説明の後、mysql>と表示されるので、CREATE DATABASE test;と入力します。
+                        <span class="supplement">;を入れないと一生聞いてきます。</span><br>
+                        SHOW Databases;と入力すると、今作ったtestがあるはずです。<br>
+                        USE test;と入力し、<br>
+                        CREATE TABLE members (id INT AUTO_INCREMENT, name TEXT, PRIMARY KEY (id)) DEFAULT
+                        CHARSET=utf8;<br>
+                        と入力し、さらに以下の3つのコマンドを実行します。<br>
+                        SELECT * FROM members;
+                        <span class="supplement">空のテーブルなので中身入ってないはず。しなくてもよい</span><br>
+                        INSERT INTO members(name) VALUES ('高井才明');<br>
+                        SELECT * FROM members;と入力すると、テーブルが確認できます。
+                        <span class="supplement">SQLでユーザを作ることを推奨します。ROOTユーザを常用するのは好ましくないです。</span>
+                    </p>
+                </div>
+            </section>
+            <section id="servlet">
+                <div>
+                    <h2>
+                        7. サーブレット
+                    </h2>
+                </div>
+                <div>
+                    <p>
+                        Mavenは依存関係として様々なパッケージを追加しやすいことが利点です。<br>
+                        pom.xmlの&lt;dependencies&gt;に以下の記述を追加します。<br>
+                        ただし、mysqlの&lt;version&gt;にはダウンロードしたものと同じ値を入力してください。<br>
+                        追記:jakartaの方が良いかと思われるので、スクリーンショットとは変わりますが記述を追加してください。
+                    </p>
+                    <pre><code>
+&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+  &lt;version&gt;1.2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.mysql&lt;/groupId&gt;
+  &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
+  &lt;version&gt;8.1.0&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;jakarta.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;jakarta.servlet-api&lt;/artifactId&gt;
+  &lt;version&gt;6.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+                </code></pre>
+                    <p>
+                        <img src="IMG\depend1.jpg" class="twoFace">
+                        <img src="IMG\depend2.jpg" class="twoFace"><br>
+                        一応ディレクトリにも作法があるみたいなので倣っておきます。<br>
+                        src > main内にjavaフォルダを作成し、さらにlocalhostフォルダも作成しておきます。
+                        <span class="supplement">localhostの方はあってもなくても結果は同じです。</span><br>
+                        作成したフォルダ内にjavaファイルを作成します。とりあえずTest.javaとしておきましょう。<br>
+                        <img src="IMG\dirjava.jpg" class="twoFace"><br>
+                        Test.javaは以下のような記述をします。packageはフォルダを作らなかった場合は記述不要です。<br>
+                        パスワードの部分は書き換えてください。
+                    </p>
+                    <pre><code>
+package localhost;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class Test extends HttpServlet
+{
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException
+	{
+		Connection conn = null;
+
+		response.setContentType("text/html; charset=Windows-31J");
+		PrintWriter out = response.getWriter();
+		out.println("&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;");
+		out.println("&lt;table border=&#39;true&#39;&gt;");
+		out.println("&lt;tr&gt;&lt;th&gt;氏名&lt;/th&gt;&lt;/tr&gt;");
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver"); // JDBC ドライバのロード
+			String url = "jdbc:mysql://localhost/test"; // 接続先URL
+			String user = "root"; //ユーザ名
+			String password = ""; // パスワード
+
+			conn = DriverManager.getConnection(url, user, password); // 接続の確立
+
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM members"); // SQL文の実行
+
+			while (rs.next()) { // SQL実行結果の取り出し
+				out.print("&lt;tr&gt;");
+				out.print("&lt;td&gt;"+rs.getString("name") + "&lt;/td&gt;");
+				out.print("&lt;/tr&gt;");
+			}
+		}
+		catch (ClassNotFoundException e) {
+			out.println("クラスが見つかりません。");
+		}
+		catch (SQLException e) {
+			out.println("データベース操作中にエラーがありました。");
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (conn != null)
+					conn.close(); // 接続の切断
+			}
+			catch (SQLException e) {}
+		}
+
+		out.println("&lt;/table&gt;");
+		out.println("&lt;/body&gt;&lt;/html&gt;");
+		out.close();
+	}
+}
+                </code></pre>
+                    <p>
+                        また、src > main > webapp > WEB-INFのweb.xmlを「テキストエディタ」で編集します。
+                        <span class="supplement">Eclipseのxmlエディタの使い方わからないので、右クリックして「次で開く」を選択してください。</span><br>
+                        &lt;display-name&gt;~~&lt;/display-name&gt;のあとに
+                    </p>
+                    <pre><code>
+&lt;servlet&gt;
+  &lt;servlet-name&gt;Test&lt;/servlet-name&gt;
+  &lt;servlet-class&gt;localhost.Test&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+  &lt;servlet-name&gt;Test&lt;/servlet-name&gt;
+  &lt;url-pattern&gt;/Test&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+                </code></pre>
+                    <p>
+                        と記述します。servlet-nameやservlet-classは適宜変更してください。<br>
+                        url-patternも変更可能だと思います。<br>
+                        ここまで来たら、一度「Maven install」を行い、サーバーを起動してアクセスしてみてください。<br>
+                        同じように作っているなら<a href="http://localhost:8080/seminar/Test"
+                            target="_blank">localhost:8080/seminar/Test</a>で開きます。
+                    </p>
+                </div>
+            </section>
+            <section id="refs">
+                <div>
+                    <h2>
+                        8. 参考
+                    </h2>
+                </div>
+                <div>
+                    <p>
+                        <a href="https://www.javadrive.jp/apache/install/index1.html" target="_blank">
+                            Apacheのダウンロード (https://www.javadrive.jp/apache/install/index1.html)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://qiita.com/taumax/items/28d5d7a97bf4c34a66f4" target="_blank">
+                            Mavenの使い方など (https://qiita.com/taumax/items/28d5d7a97bf4c34a66f4)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://qiita.com/tarosa0001/items/e5667cfa857529900216" target="_blank">
+                            Maven (https://qiita.com/tarosa0001/items/e5667cfa857529900216)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://javait.hatenablog.com/entry/2015/08/31/105237" target="_blank">
+                            Maven標準ディレクトリ (https://javait.hatenablog.com/entry/2015/08/31/105237)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://reasonable-code.com/eclipse-maven/" target="_blank">
+                            Eclipse - Maven (https://reasonable-code.com/eclipse-maven/)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://qiita.com/zaki-lknr/items/8137ac40ebd8f5bdb3c5" target="_blank">
+                            JREシステム・ライブラリー (https://qiita.com/zaki-lknr/items/8137ac40ebd8f5bdb3c5)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://www.web-dev-qa-db-ja.com/ja/eclipse/%E3%82%AF%E3%83%A9%E3%82%B9%E3%83%91%E3%82%B9%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AAorgeclipsem2emaven2classpathcontainer%E3%81%AF%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88%E3%81%95%E3%82%8C%E3%81%BE%E3%81%9B%E3%82%93/940520479/"
+                            target="_blank">
+                            クラスパス・エントリー
+                            <span
+                                style="font-size:14px">(https://www.web-dev-qa-db-ja.com/ja/eclipse/クラスパスエントリorgeclipsem2emaven2classpathcontainerはエクスポートされません/940520479)</span>
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://eng-entrance.com/java-install-env" target="_blank">
+                            JAVA_HOME (https://eng-entrance.com/java-install-env)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://qiita.com/YuichiTanaka007/items/13d89195b66891ec2081" target="_blank">
+                            AJP (https://qiita.com/YuichiTanaka007/items/13d89195b66891ec2081)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://searchman.info/java_eclipse/1090.html" target="_blank">
+                            Eclipse - Tomcat (https://searchman.info/java_eclipse/1090.html)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://www.javadrive.jp/mysql/install/index1.html" target="_blank">
+                            MySQLのダウンロード (https://www.javadrive.jp/mysql/install/index1.html)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://www.javadrive.jp/mysql/install/index2.html" target="_blank">
+                            MySQLのインストール (https://www.javadrive.jp/mysql/install/index2.html)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://prog-8.com/docs/mysql-database-setup" target="_blank">
+                            MySQLでのDB作成 (https://prog-8.com/docs/mysql-database-setup)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://nagablog.info/java-mysql-connect/" target="_blank">
+                            MySQL連携 (https://nagablog.info/java-mysql-connect/)
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://www.javadrive.jp/servlet/context/index2.html" target="_blank">
+                            おまけ (https://www.javadrive.jp/servlet/context/index2.html)
+                        </a>
+                    </p>
+                </div>
+            </section>
+            <section id="presents">
+                <div>
+                    <span class="headlines"></span>
+                </div>
+                <div>
+                    <span>
+                        mtsuchi03
+                    </span>
+                    <span>
+                        Powered by <a href="https://github.com" target="_blank">GitHub</a>
+                    </span>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <span>
+            <a href="https://github.com/mtsuchi03" target="_blank">マイページ</a>
+        </span>
+    </footer>
+    <script src="../code/index.js"></script>
+</body>
+
+</html>
