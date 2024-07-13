@@ -101,31 +101,31 @@
                             Lounge</a>からzipファイルでダウンロードします。<br>
                         ページ内のApache 2.4.58 Win64のhttpd-2.4.58-win64-VS17.zipをクリックします。
                         <span class="supplement">以下の説明では2.4.57ですが、2.4.58でも問題なく動作します。</span><br>
-                        ダウンロードが完了したら、エクスプローラー<img src="IMG\explorerico.png" style="width:16px">を開きます。<br>
+                        ダウンロードが完了したら、エクスプローラー<img src="IMG/srv/explorerico.png" style="width:16px">を開きます。<br>
                         たいていの場合、ダウンロードのフォルダに保存されているので、Apacheのフォルダを右クリックしてすべて展開します。<br>
                         展開先を指定できると思います。OneDriveを避けながらアクセスしやすいフォルダ内にhttpdなどのフォルダを作成し展開します。<br>
                         展開先にアクセスし、Apache24フォルダ内のconfフォルダ内にあるhttpd.confという設定ファイルをVSCodeやメモ帳などで開きます。<br>
                         Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力し検索します。<br>
                         右の画像のように、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
-                        <img src="IMG\httpdconfvsc.jpg" class="twoFace">
-                        <img src="IMG\httpdconfsrv.jpg" class="twoFace"><br>
+                        <img src="IMG/srv/httpdconfvsc.jpg" class="twoFace">
+                        <img src="IMG/srv/httpdconfsrv.jpg" class="twoFace"><br>
                         さらに、「ServerName」と入力し、検索します。<br>
                         www.example.comを、以下のようにlocalhost:80とし、保存します。
                         <span class="supplement">Listenの初期値が80になっていないかもしれません。その場合はそちらも編集します。</span><br>
-                        <img src="IMG\httpdconfsvn.jpg"><br>
+                        <img src="IMG/srv/httpdconfsvn.jpg"><br>
                         httpd.confはこのあとまた使用するので、閉じずに最小化しておきます。<br>
                         起動でコマンド操作をしなくてもよくなるので、Windows サービスとして登録します。<br>
                         タスクバーの検索窓にcmdと入力し、検索結果を右クリックするなどしてコマンドプロンプトを管理者として実行します。<br>
                         C:\windows\system32> と表示されているので、続けてcd ../../(Apacheの保存先)/binと入力し、Enterします。
                         <span class="supplement">コピペできるならその方が早いです。</span><br>
                         左の表示が変わるので、さらに続けてhttpd -k installと入力し、Enterします。<br>
-                        <img src="IMG\cmdins.png"><br>
+                        <img src="IMG/srv/cmdins.png"><br>
                         これでおそらくサービスとして登録されるはずなので、タスクバーの検索窓に「サービス」と入力し、サービスを開きます。<br>
                         以下のようになっていて、Apache2.4が確認できればコマンドプロンプトは終了します。<br>
-                        <img src="IMG\service.png"><br>
+                        <img src="IMG/srv/service.png"><br>
                         Apache2.4の項目をダブルクリックすると、ウィンドウが開くので、「スタートアップの種類」を手動に変え、開始します。<br>
                         おそらくファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。<br>
-                        <img src="IMG\servicew.png" class="twoFace"><br>
+                        <img src="IMG/srv/servicew.png" class="twoFace"><br>
                         ここまでの手順が行えていれば、ブラウザで<a href="http://localhost" target="_blank">localhost</a>にアクセスするとIt
                         works!と表示されています。<br>
                         開始と同じウィンドウから、停止を選び、Apacheは一度停止させます。<br>
@@ -146,8 +146,8 @@
                 </code></pre>
                     <p>
                         以下のようになります。<br>
-                        <img src="IMG\proxypass.jpg" class="twoFace">
-                        <img src="IMG\loadmodule.jpg" class="twoFace"><br>
+                        <img src="IMG/srv/ja/proxypass.jpg" class="twoFace">
+                        <img src="IMG/srv/ja/loadmodule.jpg" class="twoFace"><br>
                         これでTomcatの通信を受け付けることができます。
                     </p>
                 </div>
@@ -164,27 +164,27 @@
                         Eclipseを起動します。起動の際、webアプリのファイルを入れるワークスペースのディレクトリを設定します。
                         <span class="supplement">これまで使っていたものと同じ場所でも構わないです。</span><br>
                         起動したら、左上のファイル、新規の中からMavenプロジェクトを選びます。<br>
-                        <img src="IMG\mavenproj.jpg"><br>
+                        <img src="IMG/srv/ja/mavenproj.jpg"><br>
                         以下のような画面が開くので、「次へ」を選択します。<br>
-                        <img src="IMG/proj1.png" class="twoFace"><br>
+                        <img src="IMG/srv/ja/proj1.png" class="twoFace"><br>
                         「すべてのカタログ」か「Maven Central」からmaven-archetype-webappを選択し、「次へ」をクリックします。
                         <span class="supplement">org.apache.maven.archetypesなどと検索しても良いかと思います。</span><br>
                         このとき、バージョンが1.4であるかどうか確認しておいてください。<br>
-                        <img src="IMG/proj2.png"><br>
+                        <img src="IMG/srv/ja/proj2.png"><br>
                         グループidはcom.exampleのような形が好まれるようですが今回はlocalhostで良いかと思います。<br>
                         アーティファクトidはプロジェクトのフォルダ名になります。お好みでいいですが、極力日本語は避けましょう。<br>
                         バージョンは0.0.1-SNAPSHOTとなっているところを1.0-SNAPSHOTとしてください。<br>
                         パッケージは自動で入力されると思います。<br>
                         すべて記述できれば「完了」を選択してください。<br>
-                        <img src="IMG/proj3.png"><br>
+                        <img src="IMG/srv/ja/proj3.png"><br>
                         コンソールが勝手に動きますが、一度だけ「y」と入力し、Enterする必要があります。<br>
-                        <img src="IMG/proj4.png"><br>
+                        <img src="IMG/srv/ja/proj4.png"><br>
                         最終的に以下のように「BUILD SUCCESS」と出てフォルダが作成されます。<br>
-                        <img src="IMG/proj6.png" class="twoFace"><br>
+                        <img src="IMG/srv/ja/proj6.png" class="twoFace"><br>
                         Mavenの設定も記述します。<br>
                         以下のように、Mavenの設定ファイルであるpom.xmlをMaven POMエディターで編集します。
                         <span class="supplement">ダブルクリックで開けるような気もします。</span><br>
-                        <img src="IMG\pomeditor.jpg"><br>
+                        <img src="IMG/srv/ja/pomeditor.jpg"><br>
                         開いたpom.xmlの以下の記述を書き換えます。
                     </p>
                     <pre><code>
@@ -228,7 +228,7 @@
                     </details>
                     <p>
                         警告の対処が終われば、プロジェクトを右クリックして実行からMaven installを行います。<br>
-                        <img src="IMG/mvninstall.jpg"><br>
+                        <img src="IMG/srv/ja/mvninstall.jpg"><br>
                         コンソールの動きが止まったら同様にサーバーで実行します。<br>
                         Tomcat10_Java17でいいと思います。下の常に使用するかは各自の判断とします。<br>
                         特に何もなければそのまま完了を押せば起動します。
@@ -380,13 +380,13 @@
 &lt;/dependency&gt;
                 </code></pre>
                     <p>
-                        <img src="IMG\depend1.jpg" class="twoFace">
-                        <img src="IMG\depend2.jpg" class="twoFace"><br>
+                        <img src="IMG/srv/ja/depend1.jpg" class="twoFace">
+                        <img src="IMG/srv/ja/depend2.jpg" class="twoFace"><br>
                         一応ディレクトリにも作法があるみたいなので倣っておきます。<br>
                         src > main内にjavaフォルダを作成し、さらにlocalhostフォルダも作成しておきます。
                         <span class="supplement">localhostの方はあってもなくても結果は同じです。</span><br>
                         作成したフォルダ内にjavaファイルを作成します。とりあえずTest.javaとしておきましょう。<br>
-                        <img src="IMG\dirjava.jpg" class="twoFace"><br>
+                        <img src="IMG/srv/ja/dirjava.jpg" class="twoFace"><br>
                         Test.javaは以下のような記述をします。packageはフォルダを作らなかった場合は記述不要です。<br>
                         パスワードの部分は書き換えてください。
                     </p>

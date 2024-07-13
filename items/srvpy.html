@@ -86,22 +86,22 @@
                             target="_blank">Python</a>のサイトにアクセスし、Python 3.11.6をダウンロードします。
                         <span class="supplement">資料作成時点では、バージョンの互換が悪く、3.12.0ではエラーが発生したためです。</span><br>
                         下にスクロールすると、以下のような表があるので、Windows installer (64-bit)を選択します。<br>
-                        <img src="IMG\Files.jpg"><br>
+                        <img src="IMG/srv/py/Files.jpg"><br>
                         ダウンロードが終わったら、ファイルを実行します。<br>
                         最初の画面で「Add python.exe to PATH」にチェックを入れ、「Customize installation」を選択します。<br>
                         そのまま進んでいけばインストールが開始されます。<br>
-                        <img src="IMG\pyinstaller1.png" class="twoFace">
-                        <img src="IMG\pyinstaller2.png" class="twoFace">
-                        <img src="IMG\pyinstaller3.png" class="twoFace"><br>
+                        <img src="IMG/srv/py/pyinstaller1.png" class="twoFace">
+                        <img src="IMG/srv/py/pyinstaller2.png" class="twoFace">
+                        <img src="IMG/srv/py/pyinstaller3.png" class="twoFace"><br>
                         インストールが終わればPythonが使用可能になります。<br>
                         インストールに使用したファイルはアンインストールにも使用できるので、削除してしまわないように注意します。<br>
                         動作の確認と今後の開発のためにVSCodeでテストします。<br>
                         VSCodeの拡張機能「Python」と「Code Runner」をインストールします。<br>
-                        <img src="IMG\pythonEx.jpg" class="twoFace">
-                        <img src="IMG\CodeRunner.jpg" class="twoFace"><br>
+                        <img src="IMG/srv/py/pythonEx.jpg" class="twoFace">
+                        <img src="IMG/srv/py/CodeRunner.jpg" class="twoFace"><br>
                         hello.pyというファイルを作成し、「print("Hello World!")」と書き込みます。<br>
                         保存して右上の▷のボタンをクリックすると実行され、「Hello World!」と表示されれば完了です。<br>
-                        <img src="IMG\hellopy.jpg" class="twoFace">
+                        <img src="IMG/srv/py/hellopy.jpg" class="twoFace">
                     </p>
                 </div>
             </section>
@@ -137,7 +137,7 @@
                             Studioのダウンロードページ</a>にアクセスし、下にスクロールして、「Tools for Visual Studio」の中の「Build Tools for Visual
                         Studio」をダウンロードします。<br>
                         ファイルを開いて進むと以下のような画面が表示されます。<br>
-                        <img src="IMG\btvs.png"><br>
+                        <img src="IMG/srv/btvs.png"><br>
                         左上の「C++によるデスクトップ開発」を選択し、ダウンロードしながらインストールします。
                         <span class="supplement">ファイルサイズが大きいので、MSVC v143以外は外してみてもいいかもしれません。ただし、動作の保証はできません。</span>
                     </p>
@@ -155,31 +155,31 @@
                             Lounge</a>からzipファイルでダウンロードします。<br>
                         ページ内のApache 2.4.58 Win64のhttpd-2.4.58-win64-VS17.zipをクリックします。
                         <span class="supplement">最近バージョン更新があったようで、また互換の問題が発生するかもしれません。</span><br>
-                        ダウンロードが完了したら、エクスプローラー<img src="IMG\explorerico.png" style="width:16px">を開きます。<br>
+                        ダウンロードが完了したら、エクスプローラー<img src="IMG/srv/explorerico.png" style="width:16px">を開きます。<br>
                         たいていの場合、ダウンロードのフォルダに保存されているので、Apacheのフォルダを右クリックしてすべて展開します。<br>
                         展開先を指定できると思います。OneDriveを避けながらアクセスしやすいフォルダ内にhttpdなどのフォルダを作成し展開します。<br>
                         展開先にアクセスし、Apache24フォルダ内のconfフォルダ内にあるhttpd.confという設定ファイルをVSCodeやメモ帳などで開きます。<br>
                         Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力し検索します。<br>
                         右の画像のように、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
-                        <img src="IMG\httpdconfvsc.jpg" class="twoFace">
-                        <img src="IMG\httpdconfsrv.jpg" class="twoFace"><br>
+                        <img src="IMG/srv/httpdconfvsc.jpg" class="twoFace">
+                        <img src="IMG/srv/httpdconfsrv.jpg" class="twoFace"><br>
                         さらに、「ServerName」と入力し、検索します。<br>
                         www.example.comを、以下のようにlocalhost:80とし、保存します。
                         <span class="supplement">Listenの初期値が80になっていないかもしれません。その場合はそちらも編集します。</span><br>
-                        <img src="IMG\httpdconfsvn.jpg"><br>
+                        <img src="IMG/srv/httpdconfsvn.jpg"><br>
                         httpd.confはこのあとまた使用するので、閉じずに最小化しておきます。<br>
                         いい感じに起動するIDEがあんまりないのでWindows サービスとして登録します。<br>
                         タスクバーの検索窓にcmdと入力し、検索結果を右クリックするなどしてコマンドプロンプトを管理者として実行します。<br>
                         C:\windows\system32> と表示されているので、続けてcd ../../(Apacheの保存先)/binと入力し、Enterします。
                         <span class="supplement">コピペできるならその方が早いです。</span><br>
                         左の表示が変わるので、さらに続けてhttpd -k installと入力し、Enterします。<br>
-                        <img src="IMG\cmdins.png"><br>
+                        <img src="IMG/srv/cmdins.png"><br>
                         これでおそらくサービスとして登録されるはずなので、タスクバーの検索窓に「サービス」と入力し、サービスを開きます。<br>
                         以下のようになっていて、Apache2.4が確認できればコマンドプロンプトは終了します。<br>
-                        <img src="IMG\service.png"><br>
+                        <img src="IMG/srv/service.png"><br>
                         Apache2.4の項目をダブルクリックすると、ウィンドウが開くので、「スタートアップの種類」を手動に変え、開始します。<br>
                         おそらくファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。<br>
-                        <img src="IMG\servicew.png" style="width:30%"><br>
+                        <img src="IMG/srv/servicew.png" style="width:30%"><br>
                         ここまでの手順が行えていれば、ブラウザで<a href="http://localhost" target="_blank">localhost</a>にアクセスするとIt
                         works!と表示されています。<br>
                         開始と同じウィンドウから、停止を選び、Apacheは一度停止させておきます。<br>
@@ -273,7 +273,7 @@ from app import app as application
                 </code></pre>
                     <p>
                         httpd.confがこのようになっていれば完了です。<br>
-                        <img src="IMG\httpdconfe.jpg"><br>
+                        <img src="IMG/srv/py/httpdconfe.jpg"><br>
                         ここまでの手順がすべて正しくできていれば、<br>
                         Apacheを起動して、localhostを開くと、Flask Hello World!と表示されています。
                     </p>

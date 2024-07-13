@@ -10,7 +10,7 @@
         @font-face {
             font-family: 'Pacifico';
             font-display: block;
-            src: url('../static/fonts/Pacifico-Regular.ttf') format('truetype');
+            src: url('../resources/fonts/Pacifico-Regular.ttf') format('truetype');
         }
 
         body {
@@ -165,9 +165,9 @@
                 this.index = 0;
                 this.images = new Array;
                 this.images[0] = new Image();
-                this.images[0].src = 'IMG/rabbit1.png';
+                this.images[0].src = 'IMG/dribble/rabbit1.png';
                 this.images[1] = new Image();
-                this.images[1].src = 'IMG/rabbit2.png';
+                this.images[1].src = 'IMG/dribble/rabbit2.png';
             }
             tick(x) {
                 if (speX < 0) {
@@ -187,9 +187,9 @@
                 this.index = index;
                 this.images = new Array;
                 this.images[0] = new Image();
-                this.images[0].src = 'IMG/item1.png';
+                this.images[0].src = 'IMG/dribble/item1.png';
                 this.images[1] = new Image();
-                this.images[1].src = 'IMG/item2.png';
+                this.images[1].src = 'IMG/dribble/item2.png';
                 this.scores = [100, 150];
             }
 
@@ -216,7 +216,7 @@
                 this.y = 0;
                 this.active = true;
                 this.image = new Image();
-                this.image.src = 'IMG/bear.png';
+                this.image.src = 'IMG/dribble/bear.png';
             }
 
             tick() {
