@@ -283,7 +283,7 @@ footer {
     }
 
     header {
-        height: 60px;
+        height: 50px;
         justify-content: center;
         border-bottom: 1px solid #dcdcdc;
     }
@@ -316,7 +316,7 @@ footer {
     }
 
     #menu .logo-area {
-        height: 60px;
+        height: 50px;
         display: flex;
         align-items: center;
         padding-left: calc(75px / var(--viewport-width) - 0.2px);
@@ -336,7 +336,7 @@ footer {
         display: block;
         right: 0;
         width: 60px;
-        height: 60px;
+        height: 50px;
         cursor: pointer;
         z-index: 60;
     }
@@ -351,12 +351,12 @@ footer {
     }
 
     #btn span:nth-of-type(1) {
-        top: 22px;
+        top: 20px;
         width: 40%;
     }
 
     #btn span:nth-of-type(2) {
-        top: 32px;
+        top: 30px;
         width: 40%;
     }
 
@@ -390,6 +390,11 @@ footer {
         background-color: rgba(0, 0, 0, 0.5);
     }
 
+    #about>div.sumb-area {
+        align-items: center;
+        margin-top: 10px;
+    }
+
     div.sumb-area>.sumbnail {
         width: 60px;
         height: 60px;
@@ -402,12 +407,12 @@ footer {
     }
 
     div.sumb-area>.digest {
-        padding: 5px 0;
+        padding: 0;
     }
 
-    #about>div.sumb-area {
-        align-items: center;
-        margin-top: 10px;
+    .myname {
+        display: block;
+        font-weight: bold;
     }
 
     .headlines {

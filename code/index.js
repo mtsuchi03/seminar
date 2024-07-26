@@ -72,6 +72,9 @@ for (i = 0; i < h2.length; i++) {
 }
 //set agenda
 
+let pre = -1;
+let supFlag = false;
+
 const supplements = document.getElementsByClassName('supplement');
 let supIcon;
 for (i = 0; i < supplements.length; i++) {

@@ -20,6 +20,10 @@ img.threeFace {
     width: 30%;
 }
 
+pre {
+    background-color: #333333;
+    color: #dddddd;
+}
 
 .supplement {
     display: none;
@@ -50,7 +54,8 @@ img.threeFace {
     }
 
     pre {
-        height: 150px;
+        height: 100px;
+        max-height: 150px;
         overflow: scroll;
     }
 
@@ -73,5 +78,14 @@ img.threeFace {
 
     .emphasis {
         color: #dc143c;
+    }
+
+    .supIcon:active .supplement {
+        display: block;
+        /* ホバー時に表示 */
+    }
+
+    .supplement {
+        width: 95%;
     }
 }
