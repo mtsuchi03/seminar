@@ -37,11 +37,11 @@
                 </a>
             </div>
             <ul>
-                <li>
+                <!--<li>
                     <p>
                         工事中...
                     </p>
-                </li>
+                </li>-->
             </ul>
         </nav>
         <div>
@@ -66,12 +66,24 @@
                     </noscript>
                 </div>
             </section>
-            <section>
-                <h3 id="alert">
-                    &lt;注意&gt;<br>
-                    ソフトウェアの保存先は、<br>
-                    <span class="emphasis">C:/(Apacheの保存先)/</span>などと記述します。
+            <section id="alert">
+                <h3>
+                    注意
                 </h3>
+                <ul>
+                    <li>
+                        アプリケーションの保存先（特にApache）として、OneDriveに含まれるディレクトリを指定することは推奨しません。
+                    </li>
+                    <li>
+                        このページはWindows 11を前提にしています。
+                    </li>
+                    <li>
+                        ディレクトリを「C:/(Apacheの保存先)」のように表現します。
+                    </li>
+                    <li>
+                        このページの記載内容について、筆者は一切の責任を負いません。
+                    </li>
+                </ul>
             </section>
             <section id="python">
                 <diV>
@@ -82,26 +94,96 @@
                 <div>
                     <p>
                         Windowsでは、Pythonの利用に言語のインストールが必要となります。<br>
-                        まず、<a href="https://www.python.org/downloads/release/python-3116/"
-                            target="_blank">Python</a>のサイトにアクセスし、Python 3.11.6をダウンロードします。
-                        <span class="supplement">資料作成時点では、バージョンの互換が悪く、3.12.0ではエラーが発生したためです。</span><br>
+                        まず、<a href="https://www.python.org/downloads/release/python-3124/"
+                            target="_blank">Python</a>のサイトにアクセスし、Python 3.12.4をダウンロードします。<br>
                         下にスクロールすると、以下のような表があるので、Windows installer (64-bit)を選択します。<br>
-                        <img src="IMG/srv/py/Files.jpg"><br>
+                        <img src="IMG/srv/py/files.png"><br>
                         ダウンロードが終わったら、ファイルを実行します。<br>
                         最初の画面で「Add python.exe to PATH」にチェックを入れ、「Customize installation」を選択します。<br>
                         そのまま進んでいけばインストールが開始されます。<br>
-                        <img src="IMG/srv/py/pyinstaller1.png" class="twoFace">
-                        <img src="IMG/srv/py/pyinstaller2.png" class="twoFace">
-                        <img src="IMG/srv/py/pyinstaller3.png" class="twoFace"><br>
+                        この際、インストール先を変更することも可能です。<br>
+                        <img src="IMG/srv/py/pyinstaller3124-1.png" class="twoFace">
+                        <img src="IMG/srv/py/pyinstaller3124-2.png" class="twoFace">
+                        <img src="IMG/srv/py/pyinstaller3124-3.png" class="twoFace">
+                        <img src="IMG/srv/py/pyinstaller3124-4.png" class="twoFace"><br>
                         インストールが終わればPythonが使用可能になります。<br>
-                        インストールに使用したファイルはアンインストールにも使用できるので、削除してしまわないように注意します。<br>
+                        インストールに使用したファイルはアンインストールにも使用できるので、削除しないでください。<br>
                         動作の確認と今後の開発のためにVSCodeでテストします。<br>
                         VSCodeの拡張機能「Python」と「Code Runner」をインストールします。<br>
-                        <img src="IMG/srv/py/pythonEx.jpg" class="twoFace">
-                        <img src="IMG/srv/py/CodeRunner.jpg" class="twoFace"><br>
+                        <img src="IMG/srv/py/pythonEx.png">
+                        <img src="IMG/srv/py/CodeRunner.png">
+                    </p>
+                    <details id="settings">
+                        <summary>Code Runner用の設定について</summary>
+                        <p>
+                            Code Runner用にVSCodeの設定を追記しておきます。<br>
+                            必須の設定ではないので、飛ばしてしまっても構いません。<br>
+                            設定は、VSCodeで[Ctrl]と[,]を同時に押すことで開くことができ、右上の「設定(JSON)を開く」からsettings.jsonを開くことができます。<br>
+                            json形式なので、追記する際は、最後の行に「,」を入力してから改行します。設定は以下です。
+                        <pre>
+                                <code>
+    "code-runner.runInTerminal": true,
+    "code-runner.executorMap": {
+        "javascript": "node",
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+        "c": "cd $dir && gcc -fexec-charset=CP932 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++ -fexec-charset=CP932 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "php": "php",
+        "python": "python -u",
+        "perl": "perl",
+        "perl6": "perl6",
+        "ruby": "ruby",
+        "go": "go run",
+        "lua": "lua",
+        "groovy": "groovy",
+        "powershell": "powershell -ExecutionPolicy ByPass -File",
+        "bat": "cmd /c",
+        "shellscript": "bash",
+        "fsharp": "fsi",
+        "csharp": "scriptcs",
+        "vbscript": "cscript //Nologo",
+        "typescript": "ts-node",
+        "coffeescript": "coffee",
+        "scala": "scala",
+        "swift": "swift",
+        "julia": "julia",
+        "crystal": "crystal",
+        "ocaml": "ocaml",
+        "r": "Rscript",
+        "applescript": "osascript",
+        "clojure": "lein exec",
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+        "racket": "racket",
+        "scheme": "csi -script",
+        "ahk": "autohotkey",
+        "autoit": "autoit3",
+        "dart": "dart",
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+        "haskell": "runhaskell",
+        "nim": "nim compile --verbosity:0 --hints:off --run",
+        "lisp": "sbcl --script",
+        "kit": "kitc --run",
+        "v": "v run",
+        "sass": "sass --style expanded",
+        "scss": "scss --style expanded",
+        "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+        "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    }
+                                </code>
+                            </pre>
+                        </p>
+                    </details>
+                    <p>
                         hello.pyというファイルを作成し、「print("Hello World!")」と書き込みます。<br>
                         保存して右上の▷のボタンをクリックすると実行され、「Hello World!」と表示されれば完了です。<br>
-                        <img src="IMG/srv/py/hellopy.jpg" class="twoFace">
+                        <img src="IMG/srv/py/hellopy.png" class="twoFace"><br>
+                        <img src="IMG/srv/py/hello_result.png">
                     </p>
                 </div>
             </section>
@@ -119,6 +201,7 @@
                         「Visual Studio 2015、2017、2019、および
                         2022」の下にある表の中のアーキテクチャがX64になっているURLをクリックし、ダウンロードします。<br>
                         ダウンロードが終了し、ファイルを実行すると同意画面などが出ます。同意してそのまま進めるとインストールが始まります。<br>
+                        再起動が必要になると思います。
                     </p>
                 </div>
             </section>
@@ -130,12 +213,12 @@
                 </div>
                 <div>
                     <p>
-                        ApacheとPythonを繋ぐmod_wsgiのビルドにはVisual Studioのツールが必要になっているようです。<br>
-                        すでに紫の「Visual Studio」をダウンロードされている場合は必要ありません。
-                        <span class="supplement">青の「Visual Studio Code」には入っていません。</span><br>
-                        <a href="https://visualstudio.microsoft.com/ja/downloads/" target="_blank">Visual
+                        ApacheとPythonを繋ぐmod_wsgiのビルドにはVisual Studioのツールが必要なようです。<br>
+                        <a href="https://visualstudio.microsoft.com/ja/downloads/#build-tools-for-visual-studio-2022"
+                            target="_blank">Visual
                             Studioのダウンロードページ</a>にアクセスし、下にスクロールして、「Tools for Visual Studio」の中の「Build Tools for Visual
                         Studio」をダウンロードします。<br>
+                        <img src="IMG/srv/buildtools.png">
                         ファイルを開いて進むと以下のような画面が表示されます。<br>
                         <img src="IMG/srv/btvs.png"><br>
                         左上の「C++によるデスクトップ開発」を選択し、ダウンロードしながらインストールします。
@@ -153,32 +236,28 @@
                     <p>
                         WEBサーバとして利用するApacheは、<a href="https://www.apachelounge.com/download/" target="_blank">Apache
                             Lounge</a>からzipファイルでダウンロードします。<br>
-                        ページ内のApache 2.4.58 Win64のhttpd-2.4.58-win64-VS17.zipをクリックします。
-                        <span class="supplement">最近バージョン更新があったようで、また互換の問題が発生するかもしれません。</span><br>
+                        ページ内のApache 2.4.62 Win64のhttpd-2.4.62-win64-VS17.zipをクリックします。<br>
                         ダウンロードが完了したら、エクスプローラー<img src="IMG/srv/explorerico.png" style="width:16px">を開きます。<br>
                         たいていの場合、ダウンロードのフォルダに保存されているので、Apacheのフォルダを右クリックしてすべて展開します。<br>
                         展開先を指定できると思います。OneDriveを避けながらアクセスしやすいフォルダ内にhttpdなどのフォルダを作成し展開します。<br>
                         展開先にアクセスし、Apache24フォルダ内のconfフォルダ内にあるhttpd.confという設定ファイルをVSCodeやメモ帳などで開きます。<br>
-                        Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力し検索します。<br>
-                        右の画像のように、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
-                        <img src="IMG/srv/httpdconfvsc.jpg" class="twoFace">
-                        <img src="IMG/srv/httpdconfsrv.jpg" class="twoFace"><br>
+                        Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力し検索し、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
+                        <img src="IMG/srv/httpdconfsrvN.png"><br>
                         さらに、「ServerName」と入力し、検索します。<br>
-                        www.example.comを、以下のようにlocalhost:80とし、保存します。
-                        <span class="supplement">Listenの初期値が80になっていないかもしれません。その場合はそちらも編集します。</span><br>
-                        <img src="IMG/srv/httpdconfsvn.jpg"><br>
+                        先頭の「#」を削除し、www.example.comを、以下のようにlocalhost:80とし、保存します。<br>
+                        <img src="IMG/srv/httpdconfsvnN.png"><br>
                         httpd.confはこのあとまた使用するので、閉じずに最小化しておきます。<br>
-                        いい感じに起動するIDEがあんまりないのでWindows サービスとして登録します。<br>
+                        起動の制御のため、Windowsサービスとして登録します。<br>
                         タスクバーの検索窓にcmdと入力し、検索結果を右クリックするなどしてコマンドプロンプトを管理者として実行します。<br>
                         C:\windows\system32> と表示されているので、続けてcd ../../(Apacheの保存先)/binと入力し、Enterします。
                         <span class="supplement">コピペできるならその方が早いです。</span><br>
                         左の表示が変わるので、さらに続けてhttpd -k installと入力し、Enterします。<br>
-                        <img src="IMG/srv/cmdins.png"><br>
+                        おそらくファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。<br>
+                        <img src="IMG/srv/cmdinsN.png"><br>
                         これでおそらくサービスとして登録されるはずなので、タスクバーの検索窓に「サービス」と入力し、サービスを開きます。<br>
                         以下のようになっていて、Apache2.4が確認できればコマンドプロンプトは終了します。<br>
                         <img src="IMG/srv/service.png"><br>
                         Apache2.4の項目をダブルクリックすると、ウィンドウが開くので、「スタートアップの種類」を手動に変え、開始します。<br>
-                        おそらくファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。<br>
                         <img src="IMG/srv/servicew.png" style="width:30%"><br>
                         ここまでの手順が行えていれば、ブラウザで<a href="http://localhost" target="_blank">localhost</a>にアクセスするとIt
                         works!と表示されています。<br>
@@ -195,7 +274,8 @@
                 <div>
                     <p>
                         Pythonのパッケージには様々ありますが、基本的にはコマンドプロンプトかVSCodeのターミナルでインストール可能です。<br>
-                        コマンドプロンプトを使用する場合は、管理者ではなくそのまま起動してください。<br>
+                        mod_wsgiのインストールで引っかかるので、今回はコマンドプロンプトを使用します。<br>
+                        コマンドプロンプトは、管理者ではなくそのまま起動してください。<br>
                         pip install setuptools wheel
                         <span class="supplement">パッケージ用のパッケージだと思ってください。</span><br>
                         pip install flask
@@ -207,17 +287,19 @@
                         pip install cryptography
                         <span class="supplement">PythonとMySQLの連携に使われます。明示的には使用しませんが、なければこの後エラーが出ます。</span><br>
                         以上のコマンドを実行した後、
-                        <span class="supplement">pipが内部コマンド…と返される場合は、Pathが通っていません。環境変数として登録する必要があります。</span><br>
-                        set "MOD_WSGI_APACHE_ROOTDIR=C:/(Apacheの保存先)/Apache24"
-                        <span class="supplement">\で入力せず/で入力しないと文字化け扱いされてしまい、次に進めないので注意。</span><br>
+                        <span class="supplement">pipが内部コマンド…と返される場合は、PythonのPathが通っていません。環境変数として登録する必要があります。</span><br>
+                        set "MOD_WSGI_APACHE_ROOTDIR=C:/(Apacheの保存先)/Apache24"<br>
                         をEnterで実行します。実行しても一行開いて次の入力待ち状態になるだけです。<br>
+                        ここのパスは、必ず「/」で入力してください。「\」で入力すると文字化け扱いで次に進めません。<br>
                         ここで、<br>pip install mod_wsgi
                         <span class="supplement">Apache Web Serverとの連携に使用します。</span>を実行します。<br>
                         これまでの手順でミスがなければ問題なく実行されるはずです。時計のようなアニメーションとSuccessfullyがわかりやすいです。<br>
                         失敗してしまった場合、もう一度インストールするには、手順をやり直したうえで、キャッシュを使わない<br>
                         pip install --no-cache-dir mod_wsgiを実行してください。<br>
-                        ここで、アプリケーション用のフォルダを作成しておきます。
-                        <span class="supplement">これがそのままwebアプリのソースに使われます。OneDriveは避けて作ります。</span><br>
+                        <img src="IMG/srv/py/modwsgiN.png">
+                        ここで、アプリケーション用のフォルダを作成しておきます。<br>
+                        これがそのままwebアプリのソースに使われます。最終的に以下のような構成で作ります。<br>
+                        <img src="IMG/srv/py/flasktree.png" class="twoFace"><br>
                         フォルダ内に、以下の内容を記述したapp.pyという名前のpythonファイルを作成します。
                     </p>
                     <pre><code>
@@ -253,6 +335,7 @@ if __name__ == "__main__":
                         前項のインストールが完了されれば、続けてコマンドプロンプトで<br>
                         mod_wsgi-express module-configを実行します。<br>
                         LoadFile, LoadModule, WSGIPythonHomeなどと三行ほど出力されるので、コピーしてhttpd.confの末尾にペーストします。<br>
+                        <img src="IMG/srv/py/wsgiexpress.png">
                         アプリケーション用のフォルダ内に、application.wsgiという名前のファイルを作り、以下の内容を記述します。<br>
                     </p>
                     <pre><code>
@@ -273,7 +356,7 @@ from app import app as application
                 </code></pre>
                     <p>
                         httpd.confがこのようになっていれば完了です。<br>
-                        <img src="IMG/srv/py/httpdconfe.jpg"><br>
+                        <img src="IMG/srv/py/httpdconfe.png"><br>
                         ここまでの手順がすべて正しくできていれば、<br>
                         Apacheを起動して、localhostを開くと、Flask Hello World!と表示されています。
                     </p>
@@ -288,17 +371,16 @@ from app import app as application
                 <div>
                     <p>
                         今回、データベースを操作するSQLにはMySQLを使用します。<br>
-                        <a href="https://dev.mysql.com/downloads/mysql/" target="_blank">MySQLのページ</a>からダウンロードします。
-                        <span class="supplement">これも8.2.0にされていました。一応Archivesに8.1.0があります。8.2.0のCommand Line
-                            Clientは起動しにくいらしいです。</span><br>
-                        Windows (x86, 64-bit), MSI InstallerをDownloadします。
-                        <span class="supplement">Windowsじゃないときは、Select Operating System:から選択してください。</span><br>
+                        <a href="https://dev.mysql.com/downloads/mysql/" target="_blank">MySQLのページ</a>から8.4.2
+                        LTSをWindows (x86, 64-bit), MSI Installerでダウンロードします。<br>
+                        <img src="IMG/srv/mysql-dl1.png">
                         No thanks, just start my download.を選択するとダウンロードが始まります。<br>
+                        <img src="IMG/srv/mysql-dl2.png">
                         ダウンロードしたインストーラを開き、Next > I accept ~にチェック、Next > Typical、Next > Installで進みます。
-                        <span class="supplement">8.2.0で試したので8.1.0では異なるかもしれません。</span><br>
+                        <span class="supplement">8.2.0で試したので8.4.2では異なるかもしれません。</span><br>
                         一通り終われば、MySQL configuratorを開いて、Windows Serviceにチェックを入れてください。
                         <span class="supplement">始めから入っているかと思います。</span><br>
-                        おそらく設定するのはパスワードぐらいだと思います。<br>
+                        設定するのはパスワードぐらいだと思います。<br>
                     </p>
                 </div>
             </section>
@@ -310,14 +392,14 @@ from app import app as application
                 </div>
                 <div>
                     <p>
-                        Flaskで操作するにあたって、DBは必要になります。"無"には接続できません。<br>
+                        Flaskで操作するにあたって、DBは必要になります。<br>
                         DBを作成します。MySQL Command Line Clientを開き、パスワードを入力します。<br>
                     </p>
                     <details id="mysqlclc">
                         <summary>MySQL Command Line Clientが開かないとき</summary>
                         「環境変数を編集」という名前で出てくるアプリの<br>
                         「Path」をクリックし、編集 > 新規で C:\Program Files\MySQL\MySQL Server (バージョン)\bin<br>
-                        を追加してください。バージョンには8.2などと入力すればいいです。<br>
+                        を追加してください。バージョンには8.4などと入力すればいいです。<br>
                         その後、OKを押してウィンドウを全て消し、コマンドプロンプトで mysql -u root -pと入力してください。
                     </details>
                     <p>
@@ -335,10 +417,14 @@ from app import app as application
                         次に、Python側での処理を記述します。<br>
                         app.pyのfrom flask import Flaskをfrom flask import Flask, render_templateと記述し、<br>
                         さらに改行して、from flask_sqlalchemy import SQLAlchemyと記述します。<br>
-                        以下の記述を追加することで、DBとの接続を行います。<br><br>
-                        db_uri = 'mysql+pymysql://root:(ルートのパスワード)@localhost/test?charset=utf8'<br>
-                        app.config['SQLALCHEMY_DATABASE_URI'] = db_uri<br>
-                        db = SQLAlchemy(app)<br><br>
+                        以下の記述を追加することで、DBとの接続を行います。<br>
+                    </p>
+                    <pre><code>
+db_uri = 'mysql+pymysql://root:(rootユーザのパスワード)@localhost/test?charset=utf8'
+app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+db = SQLAlchemy(app)
+                    </code></pre>
+                    <p>
                         また、以下の記述で、テーブルを読み込みます。
                     </p>
                     <pre><code>
@@ -347,8 +433,34 @@ class Member(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text())
                 </code></pre>
-                    def hello():の内の変数nameをMember.query.all()としてみてください。<br>
-                    アプリケーション用のフォルダ内に、「templates」という名前のフォルダを作成し、中にindex.htmlを作成します。<br>
+                    <p>
+                        def hello():の内の変数nameをMember.query.all()とします。<br>
+                    </p>
+                    <pre><code>
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+                         
+db_uri = 'mysql+pymysql://root:(パスワード)@localhost/test?charset=utf8'
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
+db = SQLAlchemy(app)
+                            
+class Member(db.Model):
+    __tablename__ = 'members'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text())
+                            
+@app.route('/')
+def hello():
+    name = Member.query.all()
+    return render_template('index.html', members=name)
+                            
+if __name__ == "__main__":
+    app.run()
+                        </code></pre>
+                    <p>
+                        アプリケーション用のフォルダ内に、「templates」という名前のフォルダを作成し、中にindex.htmlを作成します。<br>
+                    </p>
                     <pre><code>
 &lt;!DOCTYPE html&gt;
 &lt;html lang="ja"&gt;

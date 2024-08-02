@@ -4,16 +4,22 @@ details {
     background-color: #f0f8ff;
 }
 
+details p {
+    padding: 0 5px 5px;
+}
+
 summary {
     background-color: #d3d3d3;
 }
 
 img {
-    width: 75%;
+    width: 95%;
+    margin: 10px 2%;
 }
 
 img.twoFace {
     width: 45%;
+    margin: 10px 2%;
 }
 
 img.threeFace {
@@ -22,8 +28,13 @@ img.threeFace {
 
 pre {
     background-color: #333333;
+    height: auto;
+    max-height: 300px;
+    line-height: 1rem;
     color: #dddddd;
+    overflow: scroll;
 }
+
 
 .supplement {
     display: none;
@@ -47,6 +58,9 @@ pre {
     /* ホバー時に表示 */
 }
 
+#alert span {
+    display: block;
+}
 
 @media screen and (max-width: 767px) {
     img {
