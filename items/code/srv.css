@@ -35,6 +35,14 @@ pre {
     overflow: scroll;
 }
 
+#headline>div:last-child {
+    text-align: right;
+}
+
+#headline #date {
+    color: #909090;
+    font-size: 0.75em;
+}
 
 .supplement {
     display: none;
@@ -64,11 +72,10 @@ pre {
 
 @media screen and (max-width: 767px) {
     img {
-        width: 100%;
+        width: 95%;
     }
 
     pre {
-        height: 100px;
         max-height: 150px;
         overflow: scroll;
     }

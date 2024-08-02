@@ -24,10 +24,6 @@
     src: url('../resources/fonts/Caveat-Regular.ttf');
 }
 
-:root {
-    --viewport-width: 100vw;
-}
-
 html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -92,6 +88,7 @@ p {
 .logo-area>a>img {
     width: 40px;
     height: 40px;
+    margin: 0;
 }
 
 #menu {
@@ -319,7 +316,6 @@ footer {
         height: 50px;
         display: flex;
         align-items: center;
-        padding-left: calc(75px / var(--viewport-width) - 0.2px);
         border-bottom: 1px solid #808080;
     }
 
