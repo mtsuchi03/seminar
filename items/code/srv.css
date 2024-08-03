@@ -14,16 +14,25 @@ summary {
 
 img {
     width: 95%;
+    display: block;
     margin: 10px 2%;
 }
 
 img.twoFace {
     width: 45%;
-    margin: 10px 2%;
+    display: inline-block;
 }
 
 img.threeFace {
     width: 30%;
+    display: inline-block;
+    margin: 10px 1%;
+}
+
+img.ico {
+    width: 16px;
+    margin: 0;
+    display: inline-block;
 }
 
 pre {

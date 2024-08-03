@@ -17,6 +17,7 @@
     <header>
         <div class="logo-area">
             <a href="../index.html">
+                <img src="../resources/svg/icon.svg" alt="logo">
                 <span>
                     mtsuchi03
                 </span>
@@ -71,26 +72,41 @@
                     </noscript>
                 </div>
             </section>
-            <section>
+            <section id="alert">
                 <h3>
-                    &lt;注意&gt;<br>
-                    C:/(Apacheの保存先)/などと記述されてある場合は、各自の環境で入力すること。
+                    注意
                 </h3>
+                <ul>
+                    <li>
+                        アプリケーションの保存先（特にApache）として、OneDriveに含まれるディレクトリを指定することは推奨しません。
+                    </li>
+                    <li>
+                        このページはWindows 11を前提にしています。
+                    </li>
+                    <li>
+                        ディレクトリを「C:/(Apacheの保存先)」のように表現します。
+                    </li>
+                    <li>
+                        このページの記載内容について、筆者は一切の責任を負いません。
+                    </li>
+                </ul>
             </section>
             <section id="vcpp">
                 <div>
                     <h2>
-                        1. Visual C++のダウンロード
+                        1. Visual C++のインストール
                     </h2>
                 </div>
                 <div>
                     <p>
                         Apacheで必要とのことなので、<a
-                            href="https://learn.microsoft.com/ja-jp/cpp/windows/latest-supported-vc-redist?view=msvc-170"
+                            href="https://learn.microsoft.com/ja-jp/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version"
                             target="_blank">Visual C++再頒布可能パッケージ</a>をダウンロードします。<br>
                         「Visual Studio 2015、2017、2019、および
                         2022」の下にある表の中のアーキテクチャがX64になっているURLをクリックし、ダウンロードします。<br>
-                        ダウンロードが終了し、ファイルを実行すると同意画面が出ます。同意してそのまま進めるとインストールが始まります。
+                        <img src="IMG/srv/vcredist.png" class="twoFace"><br>
+                        ダウンロードが終了し、ファイルを実行すると同意画面などが出ます。同意してそのまま進めるとインストールが始まります。<br>
+                        再起動が必要になると思います。
                     </p>
                 </div>
             </section>
@@ -104,12 +120,13 @@
                     <p>
                         WEBサーバとして利用するApacheは、<a href="https://www.apachelounge.com/download/" target="_blank">Apache
                             Lounge</a>からzipファイルでダウンロードします。<br>
-                        ページ内のApache 2.4.62 Win64のhttpd-2.4.62-win64-VS17.zipをクリックします。<br>
-                        ダウンロードが完了したら、エクスプローラー<img src="IMG/srv/explorerico.png" style="width:16px">を開きます。<br>
+                        ページ内のApache 2.4.62 Win64のhttpd-2.4.62-win64-VS17.zipをクリックします。
+                        <img src="IMG/srv/apacheLounge.png">
+                        ダウンロードが完了したら、エクスプローラー<img src="IMG/srv/explorerico.png" class="ico">を開きます。<br>
                         たいていの場合、ダウンロードのフォルダに保存されているので、Apacheのフォルダを右クリックしてすべて展開します。<br>
                         展開先を指定できると思います。OneDriveを避けながらアクセスしやすいフォルダ内にhttpdなどのフォルダを作成し展開します。<br>
                         展開先にアクセスし、Apache24フォルダ内のconfフォルダ内にあるhttpd.confという設定ファイルをVSCodeやメモ帳などで開きます。<br>
-                        Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力し検索し、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
+                        Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力して検索し、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
                         <img src="IMG/srv/httpdconfsrvN.png"><br>
                         さらに、「ServerName」と入力し、検索します。<br>
                         先頭の「#」を削除し、www.example.comを、以下のようにlocalhost:80とし、保存します。<br>
@@ -135,15 +152,15 @@
                         httpd.conf末尾に以下の記述を行います。
                     </p>
                     <pre><code>
-    ProxyPass / ajp://localhost:8009/
-    ProxyPassReverse / ajp://localhost:8009/
+ProxyPass / ajp://localhost:8009/
+ProxyPassReverse / ajp://localhost:8009/
                 </code></pre>
                     <p>
                         また、144行目あたりにある以下の記述から#だけを削除し、有効化します。
                     </p>
                     <pre><code>
-    #LoadModule proxy_module modules/mod_proxy.so
-    #LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+#LoadModule proxy_module modules/mod_proxy.so
+#LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
                 </code></pre>
                     <p>
                         以下のようになります。<br>
@@ -303,17 +320,24 @@
                 <div>
                     <p>
                         今回、データベースを操作するSQLにはMySQLを使用します。<br>
-                        <a href="https://dev.mysql.com/downloads/mysql/" target="_blank">MySQLのページ</a>からダウンロードします。
-                        <span class="supplement">これも8.2.0にされていました。一応Archivesに8.1.0があります。8.2.0のCommand Line
-                            Clientは起動しにくいらしいです。</span><br>
-                        Windows (x86, 64-bit), MSI InstallerをDownloadします。
-                        <span class="supplement">Windowsじゃないときは、Select Operating System:から選択してください。</span><br>
+                        <a href="https://dev.mysql.com/downloads/mysql/" target="_blank">MySQLのページ</a>から8.4.2
+                        LTSをWindows (x86, 64-bit), MSI Installerでダウンロードします。<br>
+                        <img src="IMG/srv/mysql-dl1.png">
                         No thanks, just start my download.を選択するとダウンロードが始まります。<br>
+                        <img src="IMG/srv/mysql-dl2.png">
                         ダウンロードしたインストーラを開き、Next > I accept ~にチェック、Next > Typical、Next > Installで進みます。
-                        <span class="supplement">8.2.0で試したので8.1.0では異なるかもしれません。</span><br>
-                        一通り終われば、MySQL configuratorを開いて、Windows Serviceにチェックを入れてください。
-                        <span class="supplement">始めから入っているかと思います。</span><br>
-                        おそらく設定するのはパスワードぐらいだと思います。<br>
+                        <span class="supplement">8.2.0で試したので8.4.2では異なるかもしれません。</span><br>
+                        一通り終われば、MySQL configuratorを開いて、画面に沿って進みます。<br>
+                        この時、Start the MySQL Server at System Startupのチェックを外してください。<br>
+                        <img src="IMG/srv/mysql-c1.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c2.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c3.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c4.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c5.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c6.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c7.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c7b.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c8.png" class="threeFace">
                     </p>
                 </div>
             </section>
@@ -325,28 +349,26 @@
                 </div>
                 <div>
                     <p>
-                        DBを作成します。MySQL Command Line Clientを開き、パスワードを入力します。
+                        DBを作成します。MySQL Command Line Clientを開き、パスワードを入力します。<br>
                     </p>
                     <details id="mysqlclc">
                         <summary>MySQL Command Line Clientが開かないとき</summary>
                         「環境変数を編集」という名前で出てくるアプリの<br>
                         「Path」をクリックし、編集 > 新規で C:\Program Files\MySQL\MySQL Server (バージョン)\bin<br>
-                        を追加してください。バージョンには8.2などと入力すればいいです。<br>
+                        を追加してください。バージョンには8.4などと入力すればいいです。<br>
                         その後、OKを押してウィンドウを全て消し、コマンドプロンプトで mysql -u root -pと入力してください。
                     </details>
                     <p>
                         長い説明の後、mysql>と表示されるので、CREATE DATABASE test;と入力します。
                         <span class="supplement">;を入れないと一生聞いてきます。</span><br>
                         SHOW Databases;と入力すると、今作ったtestがあるはずです。<br>
-                        USE test;と入力し、<br>
+                        USE test;と入力し、さらに以下のコマンドを実行します。<br>
                         CREATE TABLE members (id INT AUTO_INCREMENT, name TEXT, PRIMARY KEY (id)) DEFAULT
                         CHARSET=utf8;<br>
-                        と入力し、さらに以下の3つのコマンドを実行します。<br>
-                        SELECT * FROM members;
-                        <span class="supplement">空のテーブルなので中身入ってないはず。しなくてもよい</span><br>
                         INSERT INTO members(name) VALUES ('高井才明');<br>
-                        SELECT * FROM members;と入力すると、テーブルが確認できます。
-                        <span class="supplement">SQLでユーザを作ることを推奨します。ROOTユーザを常用するのは好ましくないです。</span>
+                        SELECT * FROM members;と入力すると、テーブルが確認できます。<br>
+                        <img src="IMG/srv/mysqltest.png">
+                        SQLでユーザを作ることを推奨します。ROOTユーザを常用するのは好ましくないです。
                     </p>
                 </div>
             </section>
@@ -372,7 +394,7 @@
 &lt;dependency&gt;
   &lt;groupId&gt;com.mysql&lt;/groupId&gt;
   &lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;
-  &lt;version&gt;8.1.0&lt;/version&gt;
+  &lt;version&gt;8.4.0&lt;/version&gt;
 &lt;/dependency&gt;
 &lt;dependency&gt;
   &lt;groupId&gt;jakarta.servlet&lt;/groupId&gt;

@@ -285,6 +285,10 @@ footer {
         border-bottom: 1px solid #dcdcdc;
     }
 
+    header .logo-area img {
+        display: none;
+    }
+
     .logo-area {
         margin-left: 0;
     }

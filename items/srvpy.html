@@ -17,6 +17,7 @@
     <header>
         <div class="logo-area">
             <a href="../index.html">
+                <img src="../resources/svg/icon.svg" alt="logo">
                 <span>
                     mtsuchi03
                 </span>
@@ -102,7 +103,7 @@
                         まず、<a href="https://www.python.org/downloads/release/python-3124/"
                             target="_blank">Python</a>のサイトにアクセスし、Python 3.12.4をダウンロードします。<br>
                         下にスクロールすると、以下のような表があるので、Windows installer (64-bit)を選択します。<br>
-                        <img src="IMG/srv/py/files.png"><br>
+                        <img src="IMG/srv/py/files.png">
                         ダウンロードが終わったら、ファイルを実行します。<br>
                         最初の画面で「Add python.exe to PATH」にチェックを入れ、「Customize installation」を選択します。<br>
                         そのまま進んでいけばインストールが開始されます。<br>
@@ -187,7 +188,7 @@
                     <p>
                         hello.pyというファイルを作成し、「print("Hello World!")」と書き込みます。<br>
                         保存して右上の▷のボタンをクリックすると実行され、「Hello World!」と表示されれば完了です。<br>
-                        <img src="IMG/srv/py/hellopy.png" class="twoFace"><br>
+                        <img src="IMG/srv/py/hellopy.png" class="twoFace">
                         <img src="IMG/srv/py/hello_result.png">
                     </p>
                 </div>
@@ -201,10 +202,11 @@
                 <div>
                     <p>
                         Apacheで必要とのことなので、<a
-                            href="https://learn.microsoft.com/ja-jp/cpp/windows/latest-supported-vc-redist?view=msvc-170"
+                            href="https://learn.microsoft.com/ja-jp/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version"
                             target="_blank">Visual C++再頒布可能パッケージ</a>をダウンロードします。<br>
                         「Visual Studio 2015、2017、2019、および
                         2022」の下にある表の中のアーキテクチャがX64になっているURLをクリックし、ダウンロードします。<br>
+                        <img src="IMG/srv/vcredist.png" class="twoFace"><br>
                         ダウンロードが終了し、ファイルを実行すると同意画面などが出ます。同意してそのまま進めるとインストールが始まります。<br>
                         再起動が必要になると思います。
                     </p>
@@ -225,7 +227,7 @@
                         Studio」をダウンロードします。<br>
                         <img src="IMG/srv/buildtools.png">
                         ファイルを開いて進むと以下のような画面が表示されます。<br>
-                        <img src="IMG/srv/btvs.png"><br>
+                        <img src="IMG/srv/btvs.png">
                         左上の「C++によるデスクトップ開発」を選択し、ダウンロードしながらインストールします。
                         <span class="supplement">ファイルサイズが大きいので、MSVC v143以外は外してみてもいいかもしれません。ただし、動作の保証はできません。</span>
                     </p>
@@ -241,16 +243,17 @@
                     <p>
                         WEBサーバとして利用するApacheは、<a href="https://www.apachelounge.com/download/" target="_blank">Apache
                             Lounge</a>からzipファイルでダウンロードします。<br>
-                        ページ内のApache 2.4.62 Win64のhttpd-2.4.62-win64-VS17.zipをクリックします。<br>
-                        ダウンロードが完了したら、エクスプローラー<img src="IMG/srv/explorerico.png" style="width:16px">を開きます。<br>
+                        ページ内のApache 2.4.62 Win64のhttpd-2.4.62-win64-VS17.zipをクリックします。
+                        <img src="IMG/srv/apacheLounge.png">
+                        ダウンロードが完了したら、エクスプローラー<img src="IMG/srv/explorerico.png" class="ico">を開きます。<br>
                         たいていの場合、ダウンロードのフォルダに保存されているので、Apacheのフォルダを右クリックしてすべて展開します。<br>
                         展開先を指定できると思います。OneDriveを避けながらアクセスしやすいフォルダ内にhttpdなどのフォルダを作成し展開します。<br>
                         展開先にアクセスし、Apache24フォルダ内のconfフォルダ内にあるhttpd.confという設定ファイルをVSCodeやメモ帳などで開きます。<br>
-                        Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力し検索し、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
-                        <img src="IMG/srv/httpdconfsrvN.png"><br>
+                        Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力して検索し、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
+                        <img src="IMG/srv/httpdconfsrvN.png">
                         さらに、「ServerName」と入力し、検索します。<br>
                         先頭の「#」を削除し、www.example.comを、以下のようにlocalhost:80とし、保存します。<br>
-                        <img src="IMG/srv/httpdconfsvnN.png"><br>
+                        <img src="IMG/srv/httpdconfsvnN.png">
                         httpd.confはこのあとまた使用するので、閉じずに最小化しておきます。<br>
                         起動の制御のため、Windowsサービスとして登録します。<br>
                         タスクバーの検索窓にcmdと入力し、検索結果を右クリックするなどしてコマンドプロンプトを管理者として実行します。<br>
@@ -258,12 +261,12 @@
                         <span class="supplement">コピペできるならその方が早いです。</span><br>
                         左の表示が変わるので、さらに続けてhttpd -k installと入力し、Enterします。<br>
                         おそらくファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。<br>
-                        <img src="IMG/srv/cmdinsN.png"><br>
+                        <img src="IMG/srv/cmdinsN.png">
                         これでおそらくサービスとして登録されるはずなので、タスクバーの検索窓に「サービス」と入力し、サービスを開きます。<br>
                         以下のようになっていて、Apache2.4が確認できればコマンドプロンプトは終了します。<br>
-                        <img src="IMG/srv/service.png"><br>
+                        <img src="IMG/srv/service.png">
                         Apache2.4の項目をダブルクリックすると、ウィンドウが開くので、「スタートアップの種類」を手動に変え、開始します。<br>
-                        <img src="IMG/srv/servicew.png" style="width:30%"><br>
+                        <img src="IMG/srv/servicew.png" class="twoFace"><br>
                         ここまでの手順が行えていれば、ブラウザで<a href="http://localhost" target="_blank">localhost</a>にアクセスするとIt
                         works!と表示されています。<br>
                         開始と同じウィンドウから、停止を選び、Apacheは一度停止させておきます。<br>
@@ -361,7 +364,7 @@ from app import app as application
                 </code></pre>
                     <p>
                         httpd.confがこのようになっていれば完了です。<br>
-                        <img src="IMG/srv/py/httpdconfe.png"><br>
+                        <img src="IMG/srv/py/httpdconfe.png">
                         ここまでの手順がすべて正しくできていれば、<br>
                         Apacheを起動して、localhostを開くと、Flask Hello World!と表示されています。
                     </p>
@@ -383,9 +386,17 @@ from app import app as application
                         <img src="IMG/srv/mysql-dl2.png">
                         ダウンロードしたインストーラを開き、Next > I accept ~にチェック、Next > Typical、Next > Installで進みます。
                         <span class="supplement">8.2.0で試したので8.4.2では異なるかもしれません。</span><br>
-                        一通り終われば、MySQL configuratorを開いて、Windows Serviceにチェックを入れてください。
-                        <span class="supplement">始めから入っているかと思います。</span><br>
-                        設定するのはパスワードぐらいだと思います。<br>
+                        一通り終われば、MySQL configuratorを開いて、画面に沿って進みます。<br>
+                        この時、Start the MySQL Server at System Startupのチェックを外してください。<br>
+                        <img src="IMG/srv/mysql-c1.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c2.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c3.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c4.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c5.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c6.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c7.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c7b.png" class="threeFace">
+                        <img src="IMG/srv/mysql-c8.png" class="threeFace">
                     </p>
                 </div>
             </section>
@@ -411,14 +422,12 @@ from app import app as application
                         長い説明の後、mysql>と表示されるので、CREATE DATABASE test;と入力します。
                         <span class="supplement">;を入れないと一生聞いてきます。</span><br>
                         SHOW Databases;と入力すると、今作ったtestがあるはずです。<br>
-                        USE test;と入力し、<br>
+                        USE test;と入力し、さらに以下のコマンドを実行します。<br>
                         CREATE TABLE members (id INT AUTO_INCREMENT, name TEXT, PRIMARY KEY (id)) DEFAULT
                         CHARSET=utf8;<br>
-                        と入力し、さらに以下の3つのコマンドを実行します。<br>
-                        SELECT * FROM members;
-                        <span class="supplement">空のテーブルなので中身入ってないはず。しなくてもよい</span><br>
                         INSERT INTO members(name) VALUES ('高井才明');<br>
-                        SELECT * FROM members;と入力すると、テーブルが確認できます。<br><br>
+                        SELECT * FROM members;と入力すると、テーブルが確認できます。<br>
+                        <img src="IMG/srv/mysqltest.png">
                         次に、Python側での処理を記述します。<br>
                         app.pyのfrom flask import Flaskをfrom flask import Flask, render_templateと記述し、<br>
                         さらに改行して、from flask_sqlalchemy import SQLAlchemyと記述します。<br>
@@ -485,8 +494,9 @@ if __name__ == "__main__":
                 </code></pre>
                     <p>
                         return name をreturn render_template('index.html', members=name)とします。<br>
-                        サービスでMySQLの起動を確認してFlaskかApacheを起動して確認してみてください。
-                        <span class="supplement">厳密にはrootユーザを用いることは好ましくないです。余裕があればユーザを追加してください。</span>
+                        MySQLを起動した状態でFlaskを実行して確認してみてください。<br>
+                        <img src="IMG/srv/py/flasksqltest.png">
+                        補足ですが、rootユーザを常用することは好ましくないとされています。余裕があればユーザを追加してください。
                     </p>
                 </div>
             </section>
