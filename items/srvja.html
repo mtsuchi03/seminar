@@ -7,7 +7,7 @@
     <title>
         Javaの開発環境構築(+Maven) | mtsuchi03
     </title>
-    <link rel="icon" type="image/svg+xml" href="../resources/svg/icon.svg">
+    <!-- <link rel="icon" type="image/svg+xml" href="../resources/svg/icon.svg"> -->
     <link rel="stylesheet" href="../code/sanitize.css">
     <link rel="stylesheet" href="../code/index.css">
     <link rel="stylesheet" href="code/srv.css">
@@ -16,12 +16,14 @@
 <body>
     <header>
         <div class="logo-area">
+            <!--
             <a href="../index.html">
                 <img src="../resources/svg/icon.svg" alt="logo">
                 <span>
                     mtsuchi03
                 </span>
             </a>
+            -->
         </div>
         <div id="btn">
         </div>
@@ -30,12 +32,14 @@
     <main>
         <nav id="menu">
             <div class="logo-area">
+                <!--
                 <a href="../index.html">
                     <img src="../resources/svg/icon.svg" alt="logo">
                     <span>
                         mtsuchi03
                     </span>
                 </a>
+                -->
             </div>
             <ul>
                 <!--<li>
@@ -54,7 +58,7 @@
                 </div>
                 <div>
                     <span id="date">
-                        最終更新日:2024/08/03
+                        最終更新日:2024/08/20
                     </span>
                 </div>
             </section>
@@ -87,6 +91,13 @@
                         ディレクトリを「C:/(Apacheの保存先)」のように表現します。
                     </li>
                     <li>
+                        書籍の購入の際は、JavaやTomcatのバージョンに十分注意して購入してください。<br>
+                        2017年ごろは、Webアプリに使うパッケージが変わっているので、特に注意してください。
+                    </li>
+                    <li>
+                        このページでは、基本的に最新バージョンでの設定を行います。
+                    </li>
+                    <li>
                         このページの記載内容について、筆者は一切の責任を負いません。
                     </li>
                 </ul>
@@ -99,14 +110,15 @@
                 </div>
                 <div>
                     <p>
-                        Apacheで必要とのことなので、<a
+                        Apacheのページに「Be sure you installed latest 14.40.33810 Visual C++ Redistributable Visual Studio
+                        2015-2022」と記載があるので、<a
                             href="https://learn.microsoft.com/ja-jp/cpp/windows/latest-supported-vc-redist?view=msvc-170#latest-microsoft-visual-c-redistributable-version"
                             target="_blank">Visual C++再頒布可能パッケージ</a>をダウンロードします。<br>
                         「Visual Studio 2015、2017、2019、および
                         2022」の下にある表の中のアーキテクチャがX64になっているURLをクリックし、ダウンロードします。<br>
                         <img src="IMG/srv/vcredist.png" class="twoFace"><br>
                         ダウンロードが終了し、ファイルを実行すると同意画面などが出ます。同意してそのまま進めるとインストールが始まります。<br>
-                        再起動が必要になると思います。
+                        再起動が必要になります。
                     </p>
                 </div>
             </section>
@@ -120,53 +132,58 @@
                     <p>
                         WEBサーバとして利用するApacheは、<a href="https://www.apachelounge.com/download/" target="_blank">Apache
                             Lounge</a>からzipファイルでダウンロードします。<br>
-                        ページ内のApache 2.4.62 Win64のhttpd-2.4.62-win64-VS17.zipをクリックします。
+                        ページ内のApache 2.4.62 Win64のhttpd-2.4.62-240718-win64-VS17.zipをクリックします。
                         <img src="IMG/srv/apacheLounge.png">
                         ダウンロードが完了したら、エクスプローラー<img src="IMG/srv/explorerico.png" class="ico">を開きます。<br>
-                        たいていの場合、ダウンロードのフォルダに保存されているので、Apacheのフォルダを右クリックしてすべて展開します。<br>
-                        展開先を指定できると思います。OneDriveを避けながらアクセスしやすいフォルダ内にhttpdなどのフォルダを作成し展開します。<br>
+                        たいていの場合、ダウンロードのフォルダに保存されているので、Apacheのフォルダを右クリックして「すべて展開」します。<br>
+                        展開先を指定できると思います。アクセスしやすいフォルダ内にhttpdなどの名前でフォルダを新規作成し、それを指定するとわかりやすいでしょう。<br><br>
                         展開先にアクセスし、Apache24フォルダ内のconfフォルダ内にあるhttpd.confという設定ファイルをVSCodeやメモ帳などで開きます。<br>
                         Ctrl + Hで検索窓を開くことができます。「SRVROOT」と入力して検索し、Define SRVROOT以降に展開したApacheの保存先を記述します。<br>
                         <img src="IMG/srv/httpdconfsrvN.png"><br>
                         さらに、「ServerName」と入力し、検索します。<br>
                         先頭の「#」を削除し、www.example.comを、以下のようにlocalhost:80とし、保存します。<br>
                         <img src="IMG/srv/httpdconfsvnN.png"><br>
-                        httpd.confはこのあとまた使用するので、閉じずに最小化しておきます。<br>
-                        起動でコマンド操作をしなくてもよくなるので、Windows サービスとして登録します。<br>
+                        httpd.confはこのあとまた使用するので、閉じずに置いておきます。<br>
+                        起動ごとにコマンド操作をする必要をなくすため、Windows サービスとして登録します。<br>
                         タスクバーの検索窓にcmdと入力し、検索結果を右クリックするなどしてコマンドプロンプトを管理者として実行します。<br>
                         C:\windows\system32> と表示されているので、続けてcd ../../(Apacheの保存先)/binと入力し、Enterします。
                         <span class="supplement">コピペできるならその方が早いです。</span><br>
                         左の表示が変わるので、さらに続けてhttpd -k installと入力し、Enterします。<br>
+                        <span
+                            style="font-weight: bold;">ファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。</span><br>
                         <img src="IMG/srv/cmdinsN.png"><br>
                         これでおそらくサービスとして登録されるはずなので、タスクバーの検索窓に「サービス」と入力し、サービスを開きます。<br>
-                        以下のようになっていて、Apache2.4が確認できればコマンドプロンプトは終了します。<br>
+                        以下のようになっていて、Apache2.4が確認できればコマンドプロンプトは閉じておきます。<br>
                         <img src="IMG/srv/service.png"><br>
                         Apache2.4の項目をダブルクリックすると、ウィンドウが開くので、「スタートアップの種類」を手動に変え、開始します。<br>
-                        おそらくファイアウォールの警告が出ると思うので、詳細を表示して、パブリックネットワークのチェックを外し、プライベートネットワークを選択します。<br>
+                        ここで設定を切り替えておかないと、Windowsを起動するたびにサーバも起動し、メモリの無駄遣いにつながります。<br>
                         <img src="IMG/srv/servicew.png" class="twoFace"><br>
-                        ここまでの手順が行えていれば、ブラウザで<a href="http://localhost" target="_blank">localhost</a>にアクセスするとIt
+                        ここまでの手順が正しく行えていれば、<a href="http://localhost" target="_blank">localhost</a>にアクセスするとIt
                         works!と表示されています。<br>
-                        開始と同じウィンドウから、停止を選び、Apacheは一度停止させます。<br>
-                        また、このあと説明するTomcatとの連携に使う設定も記述しておきます。
-                        <span class="supplement">必ず一度起動してから記述してください。Tomcatの設定が完了しないと503エラーが出ます。</span><br>
-                        httpd.conf末尾に以下の記述を行います。
-                    </p>
-                    <pre><code>
-ProxyPass / ajp://localhost:8009/
-ProxyPassReverse / ajp://localhost:8009/
-                </code></pre>
-                    <p>
-                        また、144行目あたりにある以下の記述から#だけを削除し、有効化します。
+                        開始と同じウィンドウから、停止を選び、Apacheは一度停止させます。<br><br>
+                        また、このあと説明するTomcatとの連携に使う設定も記述しておきます。<br>
+                        <span style="font-weight: bold;">必ず一度起動確認を行ってから記述します。Tomcatの設定が完了しないと503エラーとなります。</span><br>
+                        httpd.confの144行目付近にある以下の記述から#だけを削除し、有効化します。<br>
                     </p>
                     <pre><code>
 #LoadModule proxy_module modules/mod_proxy.so
 #LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
                 </code></pre>
                     <p>
+                        さらに、末尾に以下の記述を行います。
+                    </p>
+                    <pre><code>
+ProxyPass / ajp://localhost:8009/
+ProxyPassReverse / ajp://localhost:8009/
+                </code></pre>
+                    <p>
                         以下のようになります。<br>
-                        <img src="IMG/srv/ja/proxypass.jpg" class="twoFace">
-                        <img src="IMG/srv/ja/loadmodule.jpg" class="twoFace"><br>
-                        これでTomcatの通信を受け付けることができます。
+                        <img src="IMG/srv/ja/loadmodule.jpg" class="twoFace">
+                        <img src="IMG/srv/ja/proxypass.jpg" class="twoFace"><br>
+                        これでTomcatの通信を受け付けることができます。<br><br>
+                        Apacheは、モジュールと呼ばれる拡張機能を接続することで様々な機能を持たせることができます。<br>
+                        今回有効化したmod_proxyとmod_proxy_ajpもその一つで、初期搭載のため、コードの有効化のみで接続されます。<br>
+                        いらない機能をつけると起動や運用に無駄が生じるので、必要に応じて有効化すると考えてください。
                     </p>
                 </div>
             </section>
@@ -178,10 +195,10 @@ ProxyPassReverse / ajp://localhost:8009/
                 </div>
                 <div>
                     <p>
-                        本来ならTomcatと行きたいところですが、Eclipseの設定を覚えていない可能性も考慮してこちらから進めます。<br>
+                        流れに乗ってTomcatと行きたいところですが、SQLまで一気に進められるので、プロジェクト管理ツールMavenを使って試してみます。<br>
                         Eclipseを起動します。起動の際、webアプリのファイルを入れるワークスペースのディレクトリを設定します。
                         <span class="supplement">これまで使っていたものと同じ場所でも構わないです。</span><br>
-                        起動したら、左上のファイル、新規の中からMavenプロジェクトを選びます。<br>
+                        起動後に左上のファイル、新規の中からMavenプロジェクトを選びます。<br>
                         <img src="IMG/srv/ja/mavenproj.jpg"><br>
                         以下のような画面が開くので、「次へ」を選択します。<br>
                         <img src="IMG/srv/ja/proj1.png" class="twoFace"><br>
@@ -298,13 +315,13 @@ ProxyPassReverse / ajp://localhost:8009/
                     <p>
                         本来はtomcat-users.xmlの編集もした方がよいと思いますが、しなくてもとりあえず動くので、後回しとします。<br>
                         書き換えが正しく行われているか確認するため、Tomcatの再起動を行います。<br>
-                        EclipseにTomcatが並んでいるところがあると思います。
-                        <span class="supplement">無ければ、上のウィンドウ > ビューの表示からサーバーを選択してください。</span><br>
+                        EclipseにTomcatが並んでいるところがあると思います。<br>
+                        もし無ければ、上のウィンドウ > ビューの表示からサーバーを選択してください。<br>
                         停止していた場合は起動、起動しているなら再起動のアイコンをクリックすると起動されます。<br>
                         ここでサービスからApacheを起動します。<br>
                         このまま<a href="http://localhost" target="_blank">localhost</a>にアクセスすると404が青っぽい画面で出ていると思います。
                         <span class="supplement">503は設定の問題だと思います。とりあえずサーバーを再起動して無理なら設定を見直してください。</span><br>
-                        ここで、localhost/アーティファクトidのように記述します。自分の場合はseminarとしたので、<a href="http://localhost/seminar"
+                        ここで、localhost/アーティファクトidのように記述します。筆者の場合はseminarと設定したので、<a href="http://localhost/seminar"
                             target="_blank">localhost/seminar</a>です。<br>
                         Hello World!と表示されていれば上手くいっています。
                         <span class="supplement">src > main > webapp のindex.jspが表示されています。</span>
@@ -501,7 +518,10 @@ public class Test extends HttpServlet
                         url-patternも変更可能だと思います。<br>
                         ここまで来たら、一度「Maven install」を行い、サーバーを起動してアクセスしてみてください。<br>
                         同じように作っているなら<a href="http://localhost:8080/seminar/Test"
-                            target="_blank">localhost:8080/seminar/Test</a>で開きます。
+                            target="_blank">localhost:8080/seminar/Test</a>で開きます。<br><br>
+                        localhostに続く「:n」はポート番号を表します。ふつうは80を使っているので、指定しなければApacheと同じ80につながります。<br>
+                        :8080は主にTomcatが使うポート番号です。localhost:8080とすることで、Tomcatに直でアクセスできます。<br>
+                        今後の開発では、基本的にApacheを起動せずにTomcatのみを起動してlocalhost:8080にアクセスするようにすると楽だと思います。
                     </p>
                 </div>
             </section>
@@ -608,9 +628,11 @@ public class Test extends HttpServlet
         </div>
     </main>
     <footer>
+        <!--
         <span>
             <a href="https://github.com/mtsuchi03" target="_blank">マイページ</a>
         </span>
+        -->
     </footer>
     <script src="../code/index.js"></script>
 </body>
